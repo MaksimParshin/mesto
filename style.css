@@ -27,6 +27,7 @@
 .profile {
     width: calc(100% - 400px);
     padding-top: 40px;
+    padding-bottom: 50px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
