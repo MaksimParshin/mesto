@@ -3,7 +3,8 @@
 .page {
     margin: 0 auto;
     max-width: 1280px;
-    background-color: #545454;
+    /* background-color: #545454; */
+    background-color: #000000;
     font-family: 'Inter', Arial, Helvetica, sans-serif;
 }
 
@@ -13,9 +14,105 @@
     min-height: 74px;
     margin: 0 auto;
     padding-top: 45px;
-    padding-bottom: 40px;
+    border-bottom: 1px solid #545454;
 }
 
 .header__logo {
     width: 142px;
+    object-fit: cover;
+}
+
+/* profile */
+
+.profile {
+    width: calc(100% - 400px);
+    padding-top: 40px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile__container {
+    display: flex;
+    align-items: center;
+}
+
+.profile__avatar {
+    margin-right: 30px;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profile__info {
+    display: grid;
+    grid-template-columns: 1fr min-content;
+    align-items: baseline;
+    row-gap: 16px;
+    column-gap: 18px;
+}
+
+.profile__title {
+    margin: 0;
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 48px;
+    color: #FFFFFF;
+}
+
+.profile__description {
+    margin: 0;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+}
+
+.profile__edit-button {
+    width: 24px;
+    height: 24px;
+    background-image: url(./images/Edit_Button.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: black;
+    border: none;
+    cursor: pointer;
+}
+
+.profile__edit-button:hover {
+    opacity: .6;
+}
+
+.profile__add-button {
+    width: 150px;
+    height: 50px;
+    background-image: url(./images/Add_Button.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #000000;
+    border-radius: 2px;
+    border: 2px solid #FFFFFF;
+    cursor: pointer;
+}
+
+.profile__add-button:hover {
+    opacity: .6;
+}
+
+/*  */
+
+/* footer */
+.footer {
+    width: calc(100% - 400px);
+    margin: 0 auto;
+    padding-top: 66px;
+    padding-bottom: 60px;
+}
+
+.footer__copyright {
+    font-size: 18px;
+    line-height: 22px;
+    color: #545454;
 }
