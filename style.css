@@ -121,16 +121,16 @@
     column-gap: 17px;
 }
 
-.element__image {
-    max-width: 100%;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
-}
-
 .element {
     min-height: 361px;
     border-radius: 10px;
     background-color: #FFFFFF;
+}
+
+.element__image {
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
 }
 
 .element__container {
@@ -262,7 +262,7 @@
 
 
     .profile__add-button {
-        width: 282px;
+        width: 100%;
     }
 
     .elements {
