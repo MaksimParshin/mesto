@@ -8,7 +8,7 @@
   background-color: black;
   border: none;
   cursor: pointer;
-  transition: .5s linear
+  transition: .5s linear;
 }
 
 .profile__edit-button:hover {
