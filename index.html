@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mesto</title>
-    <link rel="stylesheet" href="normalize.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./pages/index.css" />
   </head>
   <body class="page">
     <header class="header">
@@ -75,17 +74,26 @@
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
-
     </footer>
     <div class="popup">
       <form method="post" class="popup__container" name="form-popup">
         <button class="popup__close-button" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__input popup__input_name" type="text" placeholder="Введите имя" name="name-popup">
-        <input class="popup__input popup__input_profession" type="text" placeholder="Введите профессию" name="profession-popup">
+        <input
+          class="popup__input popup__input_name"
+          type="text"
+          placeholder="Введите имя"
+          name="name-popup"
+        />
+        <input
+          class="popup__input popup__input_profession"
+          type="text"
+          placeholder="Введите профессию"
+          name="profession-popup"
+        />
         <button type="submit" class="popup__submit-button">Сохранить</button>
       </form>
     </div>
-    <script src="index.js" defer></script>
+    <script src="./pages/index.js" defer></script>
   </body>
 </html>
