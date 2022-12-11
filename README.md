@@ -12,4 +12,4 @@
 * Организация файловой структуры Nested
 * Работа с DOM при помощи Javascript
 
-Ссылка на страницу [Mesto]()
+Ссылка на страницу [Mesto](https://maksimparshin.github.io/mesto/)
