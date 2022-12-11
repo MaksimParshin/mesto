@@ -15,9 +15,12 @@
 @media (max-width: 600px) {
   .header {
     width: 100%;
+    max-width: 600px;
     padding-left: 27px;
     padding-right: 27px;
+    padding-bottom: 27px;
     padding-top: 28px;
     min-height: 55px;
+    box-sizing: border-box;
   }
 }
