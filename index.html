@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mesto</title>
+    <title>Место</title>
     <link rel="stylesheet" href="./pages/index.css" />
   </head>
   <body class="page">
@@ -25,35 +25,35 @@
       </section>
       <section class="elements">
         <div class="element">
-          <img class="element__image" src="./images/1.jpg" alt="Карачаевск" />
+          <img class="element__image" src="./images/1.jpg" alt="Разрушенный храм" />
           <div class="element__container">
             <h2 class="element__title">Карачаевск</h2>
             <button class="element__like-button" type="button"></button>
           </div>
         </div>
         <div class="element">
-          <img class="element__image" src="./images/2.jpg" alt="Гора Эльбрус" />
+          <img class="element__image" src="./images/2.jpg" alt="Гора Эльбрус на закате" />
           <div class="element__container">
             <h2 class="element__title">Гора Эльбрус</h2>
             <button class="element__like-button" type="button"></button>
           </div>
         </div>
         <div class="element">
-          <img class="element__image" src="./images/3.jpg" alt="Домбай" />
+          <img class="element__image" src="./images/3.jpg" alt="Ледник на пике горы" />
           <div class="element__container">
             <h2 class="element__title">Домбай</h2>
             <button class="element__like-button" type="button"></button>
           </div>
         </div>
         <div class="element">
-          <img class="element__image" src="./images/4.jpg" alt="Гора Эльбрус" />
+          <img class="element__image" src="./images/4.jpg" alt="Гора Эльбрус на закате" />
           <div class="element__container">
             <h2 class="element__title">Гора Эльбрус</h2>
             <button class="element__like-button" type="button"></button>
           </div>
         </div>
         <div class="element">
-          <img class="element__image" src="./images/5.jpg" alt="Домбай" />
+          <img class="element__image" src="./images/5.jpg" alt="Ледник на пике горы" />
           <div class="element__container">
             <h2 class="element__title">Домбай</h2>
             <button class="element__like-button" type="button"></button>
@@ -76,23 +76,25 @@
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
     <div class="popup">
-      <form method="post" class="popup__container" name="form-popup">
-        <button class="popup__close-button" type="button"></button>
-        <h2 class="popup__title">Редактировать профиль</h2>
+      <div class="popup__container">
+      <button class="popup__close-button" type="button"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__form" method="post"  name="form-popup">
         <input
-          class="popup__input popup__input_name"
+          class="popup__input popup__input_value_username"
           type="text"
           placeholder="Введите имя"
           name="name-popup"
         />
         <input
-          class="popup__input popup__input_profession"
+          class="popup__input popup__input_value_profession"
           type="text"
           placeholder="Введите профессию"
           name="profession-popup"
         />
         <button type="submit" class="popup__submit-button">Сохранить</button>
       </form>
+    </div>
     </div>
     <script src="./scripts/index.js" defer></script>
   </body>

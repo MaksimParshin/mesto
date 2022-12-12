@@ -9,6 +9,7 @@
   border: none;
   cursor: pointer;
   transition: .5s linear;
+  transform: translateY(4px);
 }
 
 .profile__edit-button:hover {

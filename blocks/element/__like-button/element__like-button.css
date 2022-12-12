@@ -1,17 +1,24 @@
 .element__like-button {
-  width: 22px;
+  min-width: 22px;
   height: 19px;
   padding: 0;
   background-image: url(../../../images/heart.svg);
   background-color: #FFFFFF;
   background-repeat: no-repeat;
-  background-size: contain;
   background-position: center center;
+  background-size: contain;
   border: none;
   cursor: pointer;
+  align-self: flex-end;
   transition: .5s linear;
 }
 
 .element__like-button:hover {
   opacity: 0.5;
+}
+
+@media (max-width: 600px) {
+  .element__like-button {
+    align-self: center;
+  }
 }

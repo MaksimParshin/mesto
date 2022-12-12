@@ -8,6 +8,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  transition: .5s linear;
 }
 
 @media (max-width: 768px) {
