@@ -1,6 +1,6 @@
 .element__container {
   width: calc(100% - 40px);
-  margin: 23px auto 24px auto;
+  margin: 25px auto 25px auto;
   display: flex;
   justify-content: space-between;
 }

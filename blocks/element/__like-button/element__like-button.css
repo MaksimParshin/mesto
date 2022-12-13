@@ -9,16 +9,10 @@
   background-size: contain;
   border: none;
   cursor: pointer;
-  align-self: flex-end;
+  align-self: center;
   transition: .5s linear;
 }
 
 .element__like-button:hover {
   opacity: 0.5;
-}
-
-@media (max-width: 600px) {
-  .element__like-button {
-    align-self: center;
-  }
 }
