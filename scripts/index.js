@@ -60,7 +60,6 @@ function handleFormSubmit(e) {
 }
 
 
-
 function hasLike() {
   likeButton.classList.toggle("element__like-button_state_active");
 }
@@ -89,8 +88,7 @@ addButton.addEventListener("click", function (){
 });
 
 closeButtons.forEach(e=> e.addEventListener("click", function (e) {
-  let close = e.target.closest('.popup')
-  closePopup(close);
+  closePopup(e.target.closest('.popup'));
 } ));
 
 submitForm.addEventListener("submit", handleFormSubmit);
