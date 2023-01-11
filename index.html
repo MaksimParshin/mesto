@@ -35,7 +35,7 @@
       <div class="popup__container">
         <button class="popup__close-button" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" method="post" name="form-popup">
+        <form class="popup__form popup__form_name_profile" method="post" name="form-popup">
           <input
             class="popup__input popup__input_value_username"
             type="text"
@@ -57,7 +57,7 @@
   <div class="popup__container">
     <button class="popup__close-button" type="button"></button>
     <h2 class="popup__title">Новое место</h2>
-    <form class="popup__form" method="post" name="form-popup">
+    <form class="popup__form  popup__form_name_element" method="post" name="form-popup">
       <input
         class="popup__input popup__input_value_place"
         type="text"
@@ -72,6 +72,14 @@
       />
       <button type="submit" class="popup__submit-button">Создать</button>
     </form>
+  </div>
+</div>
+<!-- попап картинки -->
+<div class="popup popup_name_img">
+  <div class="popup__container popup__container_name_img">
+    <button class="popup__close-button" type="button"></button>
+    <img class="popup__img" src="#" alt="">
+    <p class="popup__img-title"></p>
   </div>
 </div>
     <!-- шаблон карточки -->
