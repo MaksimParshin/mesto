@@ -7,3 +7,10 @@
   background: transparent;
   gap: 10px;
 }
+
+
+@media (max-width: 600px) {
+  .popup__container {
+    width: 240px;
+  }
+}
