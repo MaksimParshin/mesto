@@ -8,10 +8,13 @@ const inputProfession = document.querySelector(
 );
 const addButton = document.querySelector(".profile__add-button");
 
+// получение формы
 const submitFormProfile = document.querySelector(".popup__form_name_profile");
-const submitFormCard = document.querySelector(".popup__form_name_element");
+const submitFormItem = document.querySelector(".popup__form_name_element");
+
+// попап
 const popup = document.querySelector(".popup");
-// получение попапов
+// попап профиля
 const popupProfile = document.querySelector(".popup_name_profile");
 // попап карточки
 const popupElement = document.querySelector(".popup_name_element");
@@ -22,6 +25,7 @@ const titlePopupImage = popupImage.querySelector(".popup__img-title");
 // данные с формы создания карточки
 const inputImgName = document.querySelector(".popup__input_value_place");
 const inputImgLink = document.querySelector(".popup__input_value_url");
+
 const initialCards = [
   {
     name: "Архыз",
@@ -122,4 +126,4 @@ closeButtons.forEach((e) =>
 
 
 submitFormProfile.addEventListener("submit", addProfile);
-submitFormCard.addEventListener("submit", addItem);
+submitFormItem.addEventListener("submit", addItem);
