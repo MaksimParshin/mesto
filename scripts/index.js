@@ -93,7 +93,7 @@ function createItem(nameValue, linkValue) {
   likeButton.addEventListener('click', function(e) {
     e.target.classList.toggle("element__like-button_state_active");
   })
-  sectionElements.append(element);
+  sectionElements.prepend(element);
 }
 
 initialCards.forEach(e=> createItem(e.name, e.link));
