@@ -22,6 +22,7 @@
 
 /* elements */
 @import url(../blocks/elements/elements.css);
+@import url(../blocks/elements/__list/elements__list.css);
 
 /* element */
 @import url(../blocks/element/element.css);

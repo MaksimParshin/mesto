@@ -54,7 +54,7 @@ const initialCards = [
 ];
 
 const elementTemplate = document.querySelector(".element-template").content;
-const sectionElements = document.querySelector(".elements");
+const sectionElements = document.querySelector(".elements__list");
 
 function openPopup(newPopup) {
   newPopup.classList.add("popup_opend");
