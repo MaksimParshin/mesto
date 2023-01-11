@@ -12,12 +12,10 @@ const addButton = document.querySelector(".profile__add-button");
 const submitFormProfile = document.querySelector(".popup__form_name_profile");
 const submitFormItem = document.querySelector(".popup__form_name_element");
 
-// попап
-const popup = document.querySelector(".popup");
 // попап профиля
 const popupProfile = document.querySelector(".popup_name_profile");
 // попап карточки
-const popupElement = document.querySelector(".popup_name_element");
+const popupNetItem = document.querySelector(".popup_name_element");
 // попап картинки
 const popupImage = document.querySelector(".popup_name_img");
 const picturePopupImage = popupImage.querySelector(".popup__img");
@@ -26,46 +24,19 @@ const titlePopupImage = popupImage.querySelector(".popup__img-title");
 const inputImgName = document.querySelector(".popup__input_value_place");
 const inputImgLink = document.querySelector(".popup__input_value_url");
 
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
-
 const elementTemplate = document.querySelector(".element-template").content;
 const sectionElements = document.querySelector(".elements__list");
 
-function openPopup(newPopup) {
-  newPopup.classList.add("popup_opend");
+function openPopup(popup) {
+  popup.classList.add("popup_opend");
 }
 
-function closePopup(newPopup) {
-  newPopup.classList.remove("popup_opend");
+function closePopup(popup) {
+  popup.classList.remove("popup_opend");
 }
 
 
-function addProfile(e) {
+function editProfile(e) {
   e.preventDefault();
   username.textContent = inputName.value;
   profession.textContent = inputProfession.value;
@@ -73,7 +44,7 @@ function addProfile(e) {
 }
 
 
-function createItem(nameValue, linkValue) {
+function createItem(nameValue, linkValue, altValue) {
   const elementTemplate = document.querySelector(".element-template").content;
   const element = elementTemplate.querySelector(".element").cloneNode(true);
   const deleteButton = element.querySelector(".element__recicle-bin");
@@ -82,29 +53,35 @@ function createItem(nameValue, linkValue) {
   const likeButton = element.querySelector(".element__like-button");
   title.textContent = nameValue;
   picture.src = linkValue;
+  picture.alt = altValue;
   deleteButton.addEventListener("click", function (e) {
     e.target.closest(".element").remove();
   });
   picture.addEventListener('click', function(e) {
     openPopup(popupImage);
-    picturePopupImage.src = e.target.src;
-    titlePopupImage.textContent = e.target.closest(".element").textContent;
+    picturePopupImage.src = linkValue;
+    titlePopupImage.textContent = nameValue;
+    picturePopupImage.alt = altValue;
   })
   likeButton.addEventListener('click', function(e) {
     e.target.classList.toggle("element__like-button_state_active");
   })
-  sectionElements.prepend(element);
+
+  return element;
 }
 
-initialCards.forEach(e=> createItem(e.name, e.link));
+function renderItem(nameValue, linkValue, altValue) {
+  sectionElements.prepend(createItem(nameValue, linkValue, altValue));
+}
+
+initialCards.forEach(e=> renderItem(e.name, e.link, e.name));
 
 
 function addItem(e) {
   e.preventDefault();
-  createItem(inputImgName.value, inputImgLink.value);
-  closePopup(popupElement)
-  inputImgName.value = '';
-  inputImgLink.value = '';
+  renderItem(inputImgName.value, inputImgLink.value, inputImgName.value);
+  closePopup(popupNetItem)
+  submitFormItem.reset();
 }
 
 
@@ -115,7 +92,7 @@ editButton.addEventListener("click", function () {
 });
 
 addButton.addEventListener("click", function () {
-  openPopup(popupElement);
+  openPopup(popupNetItem);
 });
 
 closeButtons.forEach((e) =>
@@ -125,5 +102,5 @@ closeButtons.forEach((e) =>
 );
 
 
-submitFormProfile.addEventListener("submit", addProfile);
+submitFormProfile.addEventListener("submit", editProfile);
 submitFormItem.addEventListener("submit", addItem);
