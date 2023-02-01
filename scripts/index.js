@@ -26,6 +26,7 @@ const inputImgLink = document.querySelector(".popup__input_value_url");
 
 const elementTemplate = document.querySelector(".element-template").content;
 const sectionElements = document.querySelector(".elements__list");
+const popup = document.querySelectorAll(".popup");
 
 function openPopup(popup) {
   popup.classList.add("popup_opend");
@@ -98,6 +99,11 @@ addButton.addEventListener("click", function () {
 closeButtons.forEach((e) =>
   e.addEventListener("click", function (e) {
     closePopup(e.target.closest(".popup"));
+  })
+);
+popup.forEach((e) =>
+  e.addEventListener("click", function (e) {
+    closePopup(e.target);
   })
 );
 
