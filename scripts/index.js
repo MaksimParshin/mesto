@@ -26,7 +26,7 @@ const inputImgLink = document.querySelector(".popup__input_value_url");
 
 const elementTemplate = document.querySelector(".element-template").content;
 const sectionElements = document.querySelector(".elements__list");
-const popup = document.querySelectorAll(".popup");
+const popups = document.querySelectorAll(".popup");
 
 function openPopup(popup) {
   popup.classList.add("popup_opend");
@@ -36,14 +36,12 @@ function closePopup(popup) {
   popup.classList.remove("popup_opend");
 }
 
-
 function editProfile(e) {
   e.preventDefault();
   username.textContent = inputName.value;
   profession.textContent = inputProfession.value;
   closePopup(popupProfile);
 }
-
 
 function createItem(nameValue, linkValue, altValue) {
   const elementTemplate = document.querySelector(".element-template").content;
@@ -58,15 +56,15 @@ function createItem(nameValue, linkValue, altValue) {
   deleteButton.addEventListener("click", function (e) {
     e.target.closest(".element").remove();
   });
-  picture.addEventListener('click', function(e) {
+  picture.addEventListener("click", function (e) {
     openPopup(popupImage);
     picturePopupImage.src = linkValue;
     titlePopupImage.textContent = nameValue;
     picturePopupImage.alt = altValue;
-  })
-  likeButton.addEventListener('click', function(e) {
+  });
+  likeButton.addEventListener("click", function (e) {
     e.target.classList.toggle("element__like-button_state_active");
-  })
+  });
 
   return element;
 }
@@ -75,16 +73,14 @@ function renderItem(nameValue, linkValue, altValue) {
   sectionElements.prepend(createItem(nameValue, linkValue, altValue));
 }
 
-initialCards.forEach(e=> renderItem(e.name, e.link, e.name));
-
+initialCards.forEach((e) => renderItem(e.name, e.link, e.name));
 
 function addItem(e) {
   e.preventDefault();
   renderItem(inputImgName.value, inputImgLink.value, inputImgName.value);
-  closePopup(popupNetItem)
+  closePopup(popupNetItem);
   submitFormItem.reset();
 }
-
 
 editButton.addEventListener("click", function () {
   openPopup(popupProfile);
@@ -101,12 +97,20 @@ closeButtons.forEach((e) =>
     closePopup(e.target.closest(".popup"));
   })
 );
-popup.forEach((e) =>
+
+popups.forEach((e) =>
   e.addEventListener("click", function (e) {
     closePopup(e.target);
   })
 );
 
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") {
+    popups.forEach((popup) => {
+      closePopup(popup);
+    });
+  }
+});
 
 submitFormProfile.addEventListener("submit", editProfile);
 submitFormItem.addEventListener("submit", addItem);
