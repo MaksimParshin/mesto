@@ -15,3 +15,12 @@
 .popup__input:last-of-type {
   margin-bottom: 0;
 }
+
+
+.popup__input:invalid {
+border-bottom: 1px solid red;
+}
+
+.popup__input:valid {
+  border-bottom: 1px solid green;
+  }
