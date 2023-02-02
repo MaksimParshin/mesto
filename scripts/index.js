@@ -28,7 +28,6 @@ const elementTemplate = document.querySelector(".element-template").content;
 const sectionElements = document.querySelector(".elements__list");
 const popups = document.querySelectorAll(".popup");
 
-
 // открытие попапа
 function openPopup(popup) {
   popup.classList.add("popup_opend");
@@ -89,15 +88,36 @@ function addItem(e) {
   submitFormItem.reset();
 }
 
+function validForm(popupElemnet, obj) {
+  const formElement = popupElemnet.querySelector(obj.formSelector);
+  const inputList = Array.from(
+    formElement.querySelectorAll(obj.inputSelector)
+  );
+
+  inputList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, obj);
+  });
+
+  const buttonElement = popupElemnet.querySelector(obj.submitButtonSelector);
+  if (popupElemnet === popupProfile) {
+    buttonElement.classList.remove(obj.inactiveButtonClass);
+    buttonElement.removeAttribute("disabled", "");
+  } else {
+    buttonElement.classList.add(obj.inactiveButtonClass);
+    buttonElement.setAttribute("disabled", "");
+  }
+}
+
 editButton.addEventListener("click", function () {
-  setEventListeners(popupProfile, objValidate)
+  validForm(popupProfile, objValidate);
   openPopup(popupProfile);
   inputName.value = username.textContent;
   inputProfession.value = profession.textContent;
 });
 
 addButton.addEventListener("click", function () {
-  setEventListeners(popupNetItem, objValidate)
+  validForm(popupNetItem, objValidate);
+  submitFormItem.reset();
   openPopup(popupNetItem);
 });
 
