@@ -90,12 +90,14 @@ function addItem(e) {
 }
 
 editButton.addEventListener("click", function () {
+  setEventListeners(popupProfile, objValidate)
   openPopup(popupProfile);
   inputName.value = username.textContent;
   inputProfession.value = profession.textContent;
 });
 
 addButton.addEventListener("click", function () {
+  setEventListeners(popupNetItem, objValidate)
   openPopup(popupNetItem);
 });
 

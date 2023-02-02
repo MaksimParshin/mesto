@@ -1,5 +1,5 @@
 .popup__submit-button_disabled {
   opacity: 0.2;
-  cursor: none;
+  cursor: default;
   background: #E5E5E5
 }
