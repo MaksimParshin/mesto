@@ -17,15 +17,22 @@
           <img class="profile__avatar" src="./images/kusto.jpg" alt="Кусто" />
           <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit-button" type="button" aria-label="редактировать профиль"></button>
+            <button
+              class="profile__edit-button"
+              type="button"
+              aria-label="редактировать профиль"
+            ></button>
             <p class="profile__profession">исследователь океана</p>
           </div>
         </div>
-        <button class="profile__add-button" type="button" aria-label="добавить карточку"></button>
+        <button
+          class="profile__add-button"
+          type="button"
+          aria-label="добавить карточку"
+        ></button>
       </section>
       <section class="elements">
         <div class="elements__list"></div>
-
       </section>
     </main>
     <footer class="footer">
@@ -34,65 +41,111 @@
     <!-- попап редактирования профиля -->
     <div class="popup popup_name_profile">
       <div class="popup__container">
-        <button class="popup__close-button" type="button" aria-label="закрыть попап"></button>
+        <button
+          class="popup__close-button"
+          type="button"
+          aria-label="закрыть попап"
+        ></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form popup__form_name_profile" method="post" name="form-popup">
-          <input
-            class="popup__input popup__input_value_username"
-            type="text"
-            placeholder="Введите имя"
-            name="name-popup"
-            required
-            minlength="2"
-            maxlength="40"
-          />
-          <input
-            class="popup__input popup__input_value_profession"
-            type="text"
-            placeholder="Введите профессию"
-            name="profession-popup"
-            required
-            minlength="2"
-            maxlength="200"
-          />
-          <button type="submit" class="popup__submit-button" aria-label="создать профиль">Сохранить</button>
+        <form
+          class="popup__form popup__form_name_profile"
+          method="post"
+          name="form-popup"
+          novalidate
+        >
+          <label class="popup__label">
+            <input
+              class="popup__input popup__input_value_username"
+              type="text"
+              placeholder="Введите имя"
+              name="name-popup"
+              required
+              minlength="2"
+              maxlength="40"
+            />
+            <span class="popup__input-error"></span>
+          </label>
+          <label class="popup__label">
+            <input
+              class="popup__input popup__input_value_profession"
+              type="text"
+              placeholder="Введите профессию"
+              name="profession-popup"
+              required
+              minlength="2"
+              maxlength="200"
+            />
+            <span class="popup__input-error"></span>
+          </label>
+          <button
+            type="submit"
+            class="popup__submit-button"
+            aria-label="создать профиль"
+          >
+            Сохранить
+          </button>
         </form>
       </div>
     </div>
-<!-- попап создания карточки -->
-<div class="popup popup_name_element">
-  <div class="popup__container">
-    <button class="popup__close-button" type="button" aria-label="закрыть попап"></button>
-    <h2 class="popup__title">Новое место</h2>
-    <form class="popup__form  popup__form_name_element" method="post" name="form-popup">
-      <input
-        class="popup__input popup__input_value_place"
-        type="text"
-        placeholder="Название"
-        name="name-popup"
-        required
-        minlength="2"
-        maxlength="30"
-      />
-      <input
-        class="popup__input popup__input_value_url"
-        type="url"
-        placeholder="Ссылка на картинку"
-        name="profession-popup"
-        required
-      />
-      <button type="submit" class="popup__submit-button" aria-label="создать карточку">Создать</button>
-    </form>
-  </div>
-</div>
-<!-- попап картинки -->
-<div class="popup popup_name_img">
-  <div class="popup__container popup__container_name_img">
-    <button class="popup__close-button" type="button" aria-label="закрыть попап"></button>
-    <img class="popup__img" src="#" alt="">
-    <p class="popup__img-title"></p>
-  </div>
-</div>
+    <!-- попап создания карточки -->
+    <div class="popup popup_name_element">
+      <div class="popup__container">
+        <button
+          class="popup__close-button"
+          type="button"
+          aria-label="закрыть попап"
+        ></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form
+          class="popup__form popup__form_name_element"
+          method="post"
+          name="form-popup"
+          novalidate
+        >
+          <label class="popup__label">
+            <input
+              class="popup__input popup__input_value_place"
+              type="text"
+              placeholder="Название"
+              name="name-popup"
+              required
+              minlength="2"
+              maxlength="30"
+            />
+            <span class="popup__input-error"></span>
+          </label>
+          <label class="popup__label">
+            <input
+              class="popup__input popup__input_value_url"
+              type="url"
+              placeholder="Ссылка на картинку"
+              name="profession-popup"
+              required
+            />
+            <span class="popup__input-error"></span>
+          </label>
+          <button
+            type="submit"
+            class="popup__submit-button"
+            aria-label="создать карточку"
+          >
+            Создать
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- попап картинки -->
+    <div class="popup popup_name_img">
+      <div class="popup__container popup__container_name_img">
+        <button
+          class="popup__close-button"
+          type="button"
+          aria-label="закрыть попап"
+        ></button>
+        <img class="popup__img" src="#" alt="" />
+        <p class="popup__img-title"></p>
+      </div>
+    </div>
     <!-- шаблон карточки -->
     <template class="element-template">
       <div class="element">
