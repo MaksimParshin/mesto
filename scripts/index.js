@@ -28,14 +28,18 @@ const elementTemplate = document.querySelector(".element-template").content;
 const sectionElements = document.querySelector(".elements__list");
 const popups = document.querySelectorAll(".popup");
 
+
+// открытие попапа
 function openPopup(popup) {
   popup.classList.add("popup_opend");
 }
 
+// закрытие попапа
 function closePopup(popup) {
   popup.classList.remove("popup_opend");
 }
 
+// редактирование профиля
 function editProfile(e) {
   e.preventDefault();
   username.textContent = inputName.value;
@@ -43,6 +47,7 @@ function editProfile(e) {
   closePopup(popupProfile);
 }
 
+// создание карточки
 function createItem(nameValue, linkValue, altValue) {
   const elementTemplate = document.querySelector(".element-template").content;
   const element = elementTemplate.querySelector(".element").cloneNode(true);
@@ -69,10 +74,12 @@ function createItem(nameValue, linkValue, altValue) {
   return element;
 }
 
+// добавление карточки на страницу
 function renderItem(nameValue, linkValue, altValue) {
   sectionElements.prepend(createItem(nameValue, linkValue, altValue));
 }
 
+// загрузка карточек из массива на страницу
 initialCards.forEach((e) => renderItem(e.name, e.link, e.name));
 
 function addItem(e) {
@@ -92,18 +99,21 @@ addButton.addEventListener("click", function () {
   openPopup(popupNetItem);
 });
 
+// закрытие попапа по нажатию на крестик
 closeButtons.forEach((e) =>
   e.addEventListener("click", function (e) {
     closePopup(e.target.closest(".popup"));
   })
 );
 
+// закрытие попапа по нажатию на оверлэй
 popups.forEach((e) =>
   e.addEventListener("click", function (e) {
     closePopup(e.target);
   })
 );
 
+// закрытие попапа по нажатию на escape
 document.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
     popups.forEach((popup) => {
