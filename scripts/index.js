@@ -90,6 +90,7 @@ function addItem(e) {
 
 function validForm(popupElemnet, obj) {
   const formElement = popupElemnet.querySelector(obj.formSelector);
+  console.log(formElement.checkValidity())
   const inputList = Array.from(
     formElement.querySelectorAll(obj.inputSelector)
   );
@@ -117,7 +118,7 @@ editButton.addEventListener("click", function () {
 
 addButton.addEventListener("click", function () {
   validForm(popupNetItem, objValidate);
-  submitFormItem.reset();
+  // submitFormItem.reset();
   openPopup(popupNetItem);
 });
 
