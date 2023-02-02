@@ -1,3 +1,5 @@
+// Заголовок и картинка для загрузки карточек на страничку при первом откыртии
+
 const initialCards = [
   {
     name: "Архыз",
@@ -24,3 +26,14 @@ const initialCards = [
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
 ];
+
+// настройки валидации форм
+
+const objValidate = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+}
