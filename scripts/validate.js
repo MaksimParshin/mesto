@@ -56,11 +56,8 @@ function resetValidation(formElement, obj) {
     hideInputError(formElement, inputElement, obj);
   });
 
-  if (formElement === formProfile) {
-    removeDisablButton(buttonElement, obj);
-  } else {
-    addDisablButton(buttonElement, obj);
-  }
+  toggleButtonState(inputList, buttonElement, obj)
+
 }
 
 function setEventListeners(formElement, obj) {

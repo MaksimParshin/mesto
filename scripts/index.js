@@ -90,10 +90,10 @@ function addItem(e) {
 }
 
 buttonEdit.addEventListener("click", function () {
-  resetValidation(formProfile, objValidate)
   openPopup(popupProfile);
   inputName.value = username.textContent;
   inputProfession.value = profession.textContent;
+  resetValidation(formProfile, objValidate)
 });
 
 buttonAdd.addEventListener("click", function () {
