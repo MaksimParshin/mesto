@@ -30,12 +30,13 @@ const popups = document.querySelectorAll(".popup");
 // открытие попапа
 function openPopup(popup) {
   popup.classList.add("popup_opend");
-  closeEscPopup(popup);
+  document.addEventListener("keydown", closeKeydownPopup);
 }
 
 // закрытие попапа
 function closePopup(popup) {
   popup.classList.remove("popup_opend");
+  document.removeEventListener("keydown", closeKeydownPopup);
 }
 
 // редактирование профиля
@@ -120,16 +121,6 @@ function closeKeydownPopup(evt) {
   if (evt.key === "Escape") {
     const opendPopup = document.querySelector(".popup_opend");
     closePopup(opendPopup);
-  }
-}
-
-// закрытие попапа по нажатию на escape
-
-function closeEscPopup(popup) {
-  if (popup.classList.contains('popup_opend')) {
-    document.addEventListener("keydown", closeKeydownPopup);
-  } else {
-    document.removeEventListener("keydown", closeKeydownPopup);
   }
 }
 
