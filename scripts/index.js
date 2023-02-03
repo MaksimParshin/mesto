@@ -48,7 +48,6 @@ function editProfile(e) {
 
 // создание карточки
 function createItem(nameValue, linkValue, altValue) {
-  // const elementTemplate = document.querySelector(".element-template").content;
   const element = cardTemplate.querySelector(".element").cloneNode(true);
   const buttonDelete = element.querySelector(".element__recicle-bin");
   const picture = element.querySelector(".element__image");
@@ -89,14 +88,12 @@ function addItem(e) {
 }
 
 buttonEdit.addEventListener("click", function () {
-  resetValidation(formProfile, objValidate);
   openPopup(popupProfile);
   inputName.value = username.textContent;
   inputProfession.value = profession.textContent;
 });
 
 buttonAdd.addEventListener("click", function () {
-  resetValidation(formCard, objValidate);
   openPopup(popupNetItem);
 });
 
