@@ -73,6 +73,7 @@ function createItem(nameValue, linkValue, altValue) {
   return element;
 }
 
+
 // добавление карточки на страницу
 function renderItem(nameValue, linkValue, altValue) {
   cardsContainer.prepend(createItem(nameValue, linkValue, altValue));
@@ -89,12 +90,14 @@ function addItem(e) {
 }
 
 buttonEdit.addEventListener("click", function () {
+  resetValidation(formProfile, objValidate)
   openPopup(popupProfile);
   inputName.value = username.textContent;
   inputProfession.value = profession.textContent;
 });
 
 buttonAdd.addEventListener("click", function () {
+  resetValidation(formCard, objValidate)
   openPopup(popupNetItem);
 });
 
