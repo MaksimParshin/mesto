@@ -36,6 +36,16 @@ function toggleButtonState(inputList, buttonElement, obj) {
   }
 }
 
+function resetValidation(formElement, obj) {
+  const inputList = Array.from(formElement.querySelectorAll(obj.inputSelector));
+  const buttonElement = formElement.querySelector(obj.submitButtonSelector);
+  toggleButtonState(inputList, buttonElement, obj);
+  inputList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, obj);
+
+  });
+}
+
 function setEventListeners(formElement, obj) {
   const inputList = Array.from(
     formElement.querySelectorAll(obj.inputSelector)

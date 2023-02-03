@@ -23,9 +23,7 @@ const titlePopupImage = popupImage.querySelector(".popup__img-title");
 // данные с формы создания карточки
 const inputImgName = document.querySelector(".popup__input_value_place");
 const inputImgLink = document.querySelector(".popup__input_value_url");
-
 const cardTemplate = document.querySelector(".element-template").content;
-
 const cardsContainer = document.querySelector(".elements__list");
 const popups = document.querySelectorAll(".popup");
 
@@ -89,24 +87,6 @@ function addItem(e) {
   formCard.reset();
 }
 
-function resetValidation(formElement, obj) {
-  const inputList = Array.from(
-    formElement.querySelectorAll(obj.inputSelector)
-  );
-
-  inputList.forEach((inputElement) => {
-    hideInputError(formElement, inputElement, obj);
-  });
-
-  const buttonElement = formElement.querySelector(obj.submitButtonSelector);
-  if (formElement === formProfile) {
-    buttonElement.classList.remove(obj.inactiveButtonClass);
-    buttonElement.removeAttribute("disabled", "");
-  } else {
-    buttonElement.classList.add(obj.inactiveButtonClass);
-    buttonElement.setAttribute("disabled", "");
-  }
-}
 
 buttonEdit.addEventListener("click", function () {
   resetValidation(formProfile, objValidate);
@@ -130,18 +110,24 @@ buttonsClose.forEach((e) =>
 // закрытие попапа по нажатию на оверлэй
 popups.forEach((e) =>
   e.addEventListener("click", function (e) {
-    closePopup(e.target);
+    if (e.target.classList.contains("popup_opend")) {
+      closePopup(e.target);
+    }
   })
 );
 
-// закрытие попапа по нажатию на escape
-document.addEventListener("keydown", function (e) {
-  if (e.key === "Escape") {
-    popups.forEach((popup) => {
-      closePopup(popup);
-    });
+// функция закрытия попапа по нажатию на эскейп
+function closeKeydownPopup(evt) {
+  if (evt.key === "Escape") {
+    const opendPopup = document.querySelector(".popup_opend");
+    closePopup(opendPopup);
   }
-});
+}
+
+// закрытие попапа по нажатию на escape
+document.addEventListener("keydown", closeKeydownPopup);
+document.removeEventListener("keydown", closeKeydownPopup);
 
 formProfile.addEventListener("submit", editProfile);
 formCard.addEventListener("submit", addItem);
+
