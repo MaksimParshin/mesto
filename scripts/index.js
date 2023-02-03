@@ -88,9 +88,7 @@ function addItem(e) {
   submitFormItem.reset();
 }
 
-function validForm(popupElemnet, obj) {
-  const formElement = popupElemnet.querySelector(obj.formSelector);
-  console.log(formElement.checkValidity())
+function validForm(formElement, obj) {
   const inputList = Array.from(
     formElement.querySelectorAll(obj.inputSelector)
   );
@@ -99,8 +97,8 @@ function validForm(popupElemnet, obj) {
     hideInputError(formElement, inputElement, obj);
   });
 
-  const buttonElement = popupElemnet.querySelector(obj.submitButtonSelector);
-  if (popupElemnet === popupProfile) {
+  const buttonElement = formElement.querySelector(obj.submitButtonSelector);
+  if (formElement === submitFormProfile) {
     buttonElement.classList.remove(obj.inactiveButtonClass);
     buttonElement.removeAttribute("disabled", "");
   } else {
@@ -110,14 +108,14 @@ function validForm(popupElemnet, obj) {
 }
 
 editButton.addEventListener("click", function () {
-  validForm(popupProfile, objValidate);
+  validForm(submitFormProfile, objValidate);
   openPopup(popupProfile);
   inputName.value = username.textContent;
   inputProfession.value = profession.textContent;
 });
 
 addButton.addEventListener("click", function () {
-  validForm(popupNetItem, objValidate);
+  validForm(submitFormItem, objValidate);
   // submitFormItem.reset();
   openPopup(popupNetItem);
 });

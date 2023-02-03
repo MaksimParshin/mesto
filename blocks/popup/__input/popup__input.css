@@ -12,6 +12,7 @@
   outline: none;
 }
 
-.popup__input:focus, .popup__input:active {
-outline: 3px solid #0099ff;
+.popup__input:focus,
+.popup__input:active {
+  outline: 3px solid #0099ff;
 }
