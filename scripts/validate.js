@@ -42,7 +42,6 @@ function resetValidation(formElement, obj) {
   toggleButtonState(inputList, buttonElement, obj);
   inputList.forEach((inputElement) => {
     hideInputError(formElement, inputElement, obj);
-
   });
 }
 
@@ -67,6 +66,7 @@ function enableValidate(obj) {
       evt.preventDefault();
     })
     setEventListeners(formElement, obj);
+
   })
 }
 
