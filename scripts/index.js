@@ -119,8 +119,8 @@ popups.forEach((e) =>
 function closeKeydownPopup(evt) {
 
   if (evt.key === "Escape") {
-    const opendPopup = document.querySelector(".popup_opend");
-    closePopup(opendPopup);
+    const popupOpend = document.querySelector(".popup_opend");
+    closePopup(popupOpend);
   }
 }
 
