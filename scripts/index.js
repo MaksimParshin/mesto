@@ -98,6 +98,7 @@ buttonEdit.addEventListener("click", function () {
 
 buttonAdd.addEventListener("click", function () {
   resetValidation(formCard, objValidate)
+  formCard.reset();
   openPopup(popupNetItem);
 });
 
