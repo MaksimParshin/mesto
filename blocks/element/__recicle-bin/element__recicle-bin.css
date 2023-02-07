@@ -2,6 +2,7 @@
   width: 18px;
   height: 19px;
   background: url(../../../images/bin.svg);
+  background-repeat: no-repeat;
   position: absolute;
   top: 20px;
   right: 20px;
