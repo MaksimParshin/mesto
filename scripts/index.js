@@ -52,8 +52,10 @@ function editProfile(e) {
 
 
 // добавление карточки на страницу
-function renderItem(nameValue, linkValue, altValue) {
-  cardsContainer.prepend(createItem(nameValue, linkValue, altValue));
+function renderItem(nameValue, linkValue, templateSelector) {
+  const card = new Card(nameValue, linkValue, templateSelector);
+  const cardElement = card.generateCard();
+  document.querySelector(".elements__list").prepend(cardElement)
 }
 
 // загрузка карточек из массива на страницу
