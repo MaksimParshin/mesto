@@ -47,9 +47,6 @@ function editProfile(e) {
   closePopup(popupProfile);
 }
 
-// создание карточки
-
-
 
 // добавление карточки на страницу
 function renderItem(nameValue, linkValue, templateSelector) {
@@ -59,11 +56,11 @@ function renderItem(nameValue, linkValue, templateSelector) {
 }
 
 // загрузка карточек из массива на страницу
-initialCards.forEach((e) => renderItem(e.name, e.link, e.name));
+initialCards.forEach((item) => renderItem(item.name, item.link, ".element-template"));
 
 function addItem(e) {
   e.preventDefault();
-  renderItem(inputImgName.value, inputImgLink.value, inputImgName.value);
+  renderItem(inputImgName.value, inputImgLink.value, ".element-template");
   closePopup(popupNetItem);
   // formCard.reset();
 }
