@@ -86,7 +86,7 @@ function addItem(e) {
   e.preventDefault();
   renderItem(inputImgName.value, inputImgLink.value, inputImgName.value);
   closePopup(popupNetItem);
-  formCard.reset();
+  // formCard.reset();
 }
 
 buttonEdit.addEventListener("click", function () {
