@@ -23,11 +23,17 @@ function createItem(nameValue, linkValue, altValue) {
   return element;
 }
 
-
 class Card {
   constructor(name, link, templateSelector) {
     this._name = name;
     this._link = link;
     this._templateSelector = templateSelector;
+  }
+  _getTemplate() {
+    const cardElement = document
+      .querySelector(this._templateSelector)
+      .content.querySelector(".element")
+      .cloneNode(true);
+    return cardElement;
   }
 }
