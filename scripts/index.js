@@ -1,3 +1,7 @@
+import FormValidator from './validate.js';
+import Card from './Card.js';
+import {initialCards, objValidate} from './constants.js';
+
 const username = document.querySelector(".profile__name");
 const profession = document.querySelector(".profile__profession");
 const buttonEdit = document.querySelector(".profile__edit-button");
@@ -23,8 +27,6 @@ const titlePopupImage = popupImage.querySelector(".popup__img-title");
 // данные с формы создания карточки
 const inputImgName = document.querySelector(".popup__input_value_place");
 const inputImgLink = document.querySelector(".popup__input_value_url");
-const cardTemplate = document.querySelector(".element-template").content;
-const cardsContainer = document.querySelector(".elements__list");
 const popups = document.querySelectorAll(".popup");
 
 const validationProfile = new FormValidator(objValidate, formProfile);
@@ -128,3 +130,6 @@ function closeKeydownPopup(evt) {
 
 formProfile.addEventListener("submit", editProfile);
 formCard.addEventListener("submit", addCard);
+
+
+export {picturePopupImage, titlePopupImage}
