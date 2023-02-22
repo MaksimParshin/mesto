@@ -27,6 +27,14 @@ const cardTemplate = document.querySelector(".element-template").content;
 const cardsContainer = document.querySelector(".elements__list");
 const popups = document.querySelectorAll(".popup");
 
+const validationProfile = new FormValidator(objValidate, formProfile);
+validationProfile.enableValidate();
+validationProfile.resetValidation();
+
+const validationCard = new FormValidator(objValidate, formCard);
+validationCard.enableValidate();
+validationCard.resetValidation();
+
 // открытие попапа
 function openPopup(popup) {
   popup.classList.add("popup_opend");
@@ -39,43 +47,55 @@ function closePopup(popup) {
   document.removeEventListener("keydown", closeKeydownPopup);
 }
 
+
+
 // редактирование профиля
 function editProfile(e) {
   e.preventDefault();
   username.textContent = inputName.value;
   profession.textContent = inputProfession.value;
   closePopup(popupProfile);
+  validationProfile.resetValidation();
 }
 
-
-// добавление карточки на страницу
-function renderItem(nameValue, linkValue, templateSelector) {
-  const card = new Card(nameValue, linkValue, templateSelector);
+function renderItem(nameValue, linkValue, newTemplate) {
+  const card = new Card(nameValue, linkValue, newTemplate);
   const cardElement = card.generateCard();
   document.querySelector(".elements__list").prepend(cardElement)
 }
 
-// загрузка карточек из массива на страницу
-initialCards.forEach((item) => renderItem(item.name, item.link, ".element-template"));
+// загрузка карточек из массива
+initialCards.forEach(item=> {
+  renderItem(item.name, item.link, ".element-template");
 
-function addItem(e) {
+})
+
+
+// добавление карточки на страницу
+
+function addCard(e) {
   e.preventDefault();
   renderItem(inputImgName.value, inputImgLink.value, ".element-template");
   closePopup(popupNetItem);
-  // formCard.reset();
+  formCard.reset();
 }
 
+
+// редактирование профиля
 buttonEdit.addEventListener("click", function () {
   openPopup(popupProfile);
   inputName.value = username.textContent;
   inputProfession.value = profession.textContent;
-  resetValidation(formProfile, objValidate)
+  validationProfile.resetValidation();
 });
 
+// добавление карточки
 buttonAdd.addEventListener("click", function () {
-  resetValidation(formCard, objValidate)
-  formCard.reset();
+
+  validationCard.resetValidation();
   openPopup(popupNetItem);
+
+  formCard.reset();
 });
 
 // закрытие попапа по нажатию на крестик
@@ -105,5 +125,6 @@ function closeKeydownPopup(evt) {
 }
 
 
+
 formProfile.addEventListener("submit", editProfile);
-formCard.addEventListener("submit", addItem);
+formCard.addEventListener("submit", addCard);
