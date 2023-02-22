@@ -1,7 +1,8 @@
-import FormValidator from './validate.js';
+import FormValidator from './FormValidator.js';
 import Card from './Card.js';
 import {initialCards, objValidate} from './constants.js';
 
+const cardsContainer = document.querySelector(".elements__list");
 const username = document.querySelector(".profile__name");
 const profession = document.querySelector(".profile__profession");
 const buttonEdit = document.querySelector(".profile__edit-button");
@@ -63,12 +64,13 @@ function editProfile(e) {
 function renderItem(nameValue, linkValue, newTemplate) {
   const card = new Card(nameValue, linkValue, newTemplate);
   const cardElement = card.generateCard();
-  document.querySelector(".elements__list").prepend(cardElement)
+  return cardElement;
+
 }
 
 // загрузка карточек из массива
 initialCards.forEach(item=> {
-  renderItem(item.name, item.link, ".element-template");
+  cardsContainer.prepend(renderItem(item.name, item.link, ".element-template"));
 
 })
 
@@ -77,7 +79,7 @@ initialCards.forEach(item=> {
 
 function addCard(e) {
   e.preventDefault();
-  renderItem(inputImgName.value, inputImgLink.value, ".element-template");
+  cardsContainer.prepend(renderItem(inputImgName.value, inputImgLink.value, ".element-template"));
   closePopup(popupNetItem);
   formCard.reset();
 }
@@ -132,4 +134,4 @@ formProfile.addEventListener("submit", editProfile);
 formCard.addEventListener("submit", addCard);
 
 
-export {picturePopupImage, titlePopupImage}
+export {picturePopupImage, titlePopupImage, popupImage, openPopup}

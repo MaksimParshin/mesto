@@ -1,4 +1,9 @@
-import {picturePopupImage, titlePopupImage} from './index.js';
+import {
+  picturePopupImage,
+  titlePopupImage,
+  popupImage,
+  openPopup,
+} from "./index.js";
 export default class Card {
   constructor(name, link, templateSelector) {
     this._name = name;
@@ -20,23 +25,9 @@ export default class Card {
     this._title.textContent = this._name;
     this._picture.src = this._link;
     this._picture.alt = this._name;
-    this._setEventListener()
+    this._setEventListener();
 
-    return this._element
-  }
-
-
-  _toggleLike() {
-    this._element
-    .querySelector(".element__like-button")
-    .classList.toggle("element__like-button_state_active");
-  }
-
-  _deleteCard() {
-    this._element
-      .querySelector(".element__recicle-bin")
-      .closest(".element")
-      .remove();
+    return this._element;
   }
 
   _toggleLike() {
@@ -45,29 +36,36 @@ export default class Card {
       .classList.toggle("element__like-button_state_active");
   }
 
- _openPopupPicture() {
-  openPopup(popupImage);
-  picturePopupImage.src = this._link;
-  titlePopupImage.textContent = this._name;
-  picturePopupImage.alt = this._name;
+  _deleteCard() {
+    this._element.remove();
+  }
 
- }
+  _toggleLike() {
+    this._element
+      .querySelector(".element__like-button")
+      .classList.toggle("element__like-button_state_active");
+  }
 
- _setEventListener() {
-  this._element
+  _openPopupPicture() {
+    openPopup(popupImage);
+    picturePopupImage.src = this._link;
+    titlePopupImage.textContent = this._name;
+    picturePopupImage.alt = this._name;
+  }
+
+  _setEventListener() {
+    this._element
       .querySelector(".element__recicle-bin")
       .addEventListener("click", () => {
         this._deleteCard();
       });
-    this._element
-      .querySelector(".element__image")
-      .addEventListener("click", () => {
-        this._openPopupPicture();
-      });
+    this._picture.addEventListener("click", () => {
+      this._openPopupPicture();
+    });
     this._element
       .querySelector(".element__like-button")
       .addEventListener("click", () => {
         this._toggleLike();
       });
- }
+  }
 }
