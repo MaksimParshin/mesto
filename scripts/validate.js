@@ -74,7 +74,7 @@ class FormValidator {
     const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
     this._toggleButtonState(inputList, buttonElement);
     inputList.forEach((inputElement) => {
-      inputElement.addEventListener("input", function () {
+      inputElement.addEventListener("input", ()=> {
         this._checkInputValidity(inputElement);
         this._toggleButtonState(inputList, buttonElement);
       });
@@ -82,17 +82,11 @@ class FormValidator {
   }
 
   enableValidate() {
-      this._formElement.addEventListener("submit", function (evt) {
+      this._formElement.addEventListener("submit", (evt)=>{
         evt.preventDefault();
       });
-      this._setEventListeners(formElement, obj);
+      this._setEventListeners();
    ;
   }
 }
 
-
-
-
-
-
-enableValidate(objValidate);
