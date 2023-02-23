@@ -61,16 +61,22 @@ function editProfile(e) {
   validationProfile.resetValidation();
 }
 
-function renderItem(nameValue, linkValue, newTemplate) {
+// создание экземпляра карточки
+function creatCard(nameValue, linkValue, newTemplate) {
   const card = new Card(nameValue, linkValue, newTemplate);
   const cardElement = card.generateCard();
   return cardElement;
+}
+
+// отображение карточки в ДОМ
+function renderItem(item) {
+  cardsContainer.prepend(item);
 
 }
 
 // загрузка карточек из массива
 initialCards.forEach(item=> {
-  cardsContainer.prepend(renderItem(item.name, item.link, ".element-template"));
+  renderItem(creatCard(item.name, item.link, ".element-template"));
 
 })
 
@@ -79,7 +85,7 @@ initialCards.forEach(item=> {
 
 function addCard(e) {
   e.preventDefault();
-  cardsContainer.prepend(renderItem(inputImgName.value, inputImgLink.value, ".element-template"));
+  renderItem(creatCard(inputImgName.value, inputImgLink.value, ".element-template"));
   closePopup(popupNetItem);
   formCard.reset();
 }
