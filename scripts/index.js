@@ -1,8 +1,9 @@
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
 import {initialCards, objValidate} from './constants.js';
+import Section from "./Section.js"
 
-const cardsContainer = document.querySelector(".elements__list");
+// const cardsContainer = document.querySelector(".elements__list");
 const username = document.querySelector(".profile__name");
 const profession = document.querySelector(".profile__profession");
 const buttonEdit = document.querySelector(".profile__edit-button");
@@ -38,6 +39,13 @@ const validationCard = new FormValidator(objValidate, formCard);
 validationCard.enableValidate();
 validationCard.resetValidation();
 
+const cardsContainer = new Section({data: initialCards, renderer: (item)=>{
+  const card = creatCard(item.name, item.link, ".element-template");
+  cardsContainer.addItem(card)
+}}, ".elements__list");
+cardsContainer.renderItem();
+
+
 // открытие попапа
 function openPopup(popup) {
   popup.classList.add("popup_opend");
@@ -69,23 +77,23 @@ function creatCard(nameValue, linkValue, newTemplate) {
 }
 
 // отображение карточки в ДОМ
-function renderItem(item) {
-  cardsContainer.prepend(item);
+// function renderItem(item) {
+//   cardsContainer.prepend(item);
 
-}
+// }
 
 // загрузка карточек из массива
-initialCards.forEach(item=> {
-  renderItem(creatCard(item.name, item.link, ".element-template"));
+// initialCards.forEach(item=> {
+//   renderItem(creatCard(item.name, item.link, ".element-template"));
 
-})
+// })
 
 
 // добавление карточки на страницу
 
 function addCard(e) {
   e.preventDefault();
-  renderItem(creatCard(inputImgName.value, inputImgLink.value, ".element-template"));
+  cardsContainer.addItem(creatCard(inputImgName.value, inputImgLink.value, ".element-template"));
   closePopup(popupNetItem);
   formCard.reset();
 }
