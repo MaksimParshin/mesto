@@ -3,6 +3,9 @@ import Card from './Card.js';
 import {initialCards, objValidate} from './constants.js';
 import Section from "./Section.js"
 import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
+
 
 // const cardsContainer = document.querySelector(".elements__list");
 const username = document.querySelector(".profile__name");
