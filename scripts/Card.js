@@ -5,10 +5,11 @@ import {
   openPopup,
 } from "./index.js";
 export default class Card {
-  constructor(name, link, templateSelector) {
+  constructor(name, link, templateSelector, {handleCardClick}) {
     this._name = name;
     this._link = link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
   _getTemplate() {
     const cardElement = document
@@ -46,12 +47,12 @@ export default class Card {
       .classList.toggle("element__like-button_state_active");
   }
 
-  _openPopupPicture() {
-    openPopup(popupImage);
-    picturePopupImage.src = this._link;
-    titlePopupImage.textContent = this._name;
-    picturePopupImage.alt = this._name;
-  }
+  // _openPopupPicture() {
+  //   openPopup(popupImage);
+  //   picturePopupImage.src = this._link;
+  //   titlePopupImage.textContent = this._name;
+  //   picturePopupImage.alt = this._name;
+  // }
 
   _setEventListener() {
     this._element
@@ -60,7 +61,7 @@ export default class Card {
         this._deleteCard();
       });
     this._picture.addEventListener("click", () => {
-      this._openPopupPicture();
+      this._handleCardClick(this._name, this._link);
     });
     this._element
       .querySelector(".element__like-button")
