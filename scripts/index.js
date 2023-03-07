@@ -5,7 +5,7 @@ import Section from "./Section.js"
 import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
-
+import UserInfo from './UserInfo.js';
 
 // const cardsContainer = document.querySelector(".elements__list");
 const username = document.querySelector(".profile__name");
