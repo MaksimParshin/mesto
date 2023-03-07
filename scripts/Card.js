@@ -1,9 +1,4 @@
-import {
-  picturePopupImage,
-  titlePopupImage,
-  popupImage,
-  openPopup,
-} from "./index.js";
+
 export default class Card {
   constructor(name, link, templateSelector, {handleCardClick}) {
     this._name = name;
@@ -46,13 +41,6 @@ export default class Card {
       .querySelector(".element__like-button")
       .classList.toggle("element__like-button_state_active");
   }
-
-  // _openPopupPicture() {
-  //   openPopup(popupImage);
-  //   picturePopupImage.src = this._link;
-  //   titlePopupImage.textContent = this._name;
-  //   picturePopupImage.alt = this._name;
-  // }
 
   _setEventListener() {
     this._element
