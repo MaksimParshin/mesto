@@ -1,17 +1,14 @@
-import FormValidator from './FormValidator.js';
-import Card from './Card.js';
-import {initialCards, objValidate} from './constants.js';
-import Section from "./Section.js"
-import Popup from './Popup.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
+import FormValidator from "./FormValidator.js";
+import Card from "./Card.js";
+import { initialCards, objValidate } from "./constants.js";
+import Section from "./Section.js";
+import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
+import UserInfo from "./UserInfo.js";
 
-// const cardsContainer = document.querySelector(".elements__list");
-const username = document.querySelector(".profile__name");
-const profession = document.querySelector(".profile__profession");
+
 const buttonEdit = document.querySelector(".profile__edit-button");
-const buttonsClose = document.querySelectorAll(".popup__close-button");
+
 const inputName = document.querySelector(".popup__input_value_username");
 const inputProfession = document.querySelector(
   ".popup__input_value_profession"
@@ -22,18 +19,7 @@ const buttonAdd = document.querySelector(".profile__add-button");
 const formProfile = document.querySelector(".popup__form_name_profile");
 const formCard = document.querySelector(".popup__form_name_element");
 
-// попап профиля
-const popupProfile = document.querySelector(".popup_name_profile");
-// попап карточки
-const popupNetItem = document.querySelector(".popup_name_element");
-// попап картинки
-const popupImage = document.querySelector(".popup_name_img");
-const picturePopupImage = popupImage.querySelector(".popup__img");
-const titlePopupImage = popupImage.querySelector(".popup__img-title");
-// данные с формы создания карточки
-const inputImgName = document.querySelector(".popup__input_value_place");
-const inputImgLink = document.querySelector(".popup__input_value_url");
-const popups = document.querySelectorAll(".popup");
+
 
 const validationProfile = new FormValidator(objValidate, formProfile);
 validationProfile.enableValidate();
@@ -43,113 +29,85 @@ const validationCard = new FormValidator(objValidate, formCard);
 validationCard.enableValidate();
 validationCard.resetValidation();
 
-const cardsContainer = new Section({data: initialCards, renderer: (item)=>{
-  const card = creatCard(item.name, item.link, ".element-template");
-  cardsContainer.addItem(card)
-}}, ".elements__list");
-cardsContainer.renderItem();
+const userInfo = new UserInfo({
+  profileUserName: ".profile__name",
+  profileAbout: ".profile__profession",
+});
 
 
-// открытие попапа
-function openPopup(popup) {
-  popup.classList.add("popup_opend");
-  document.addEventListener("keydown", closeKeydownPopup);
-}
+const popupClassCard = new PopupWithForm({
+  selectorPopup: ".popup_name_element",
+  handleFormSubmit: ({place, link}) => {
+    const card = creatCard({
+      name: place,
+      link: link,
+      templateSelector: ".element-template",
+      handleCardClick: (name, link) => {
+        popupWithIMG.open(name, link);
+      },
+    });
+    cardsContainer.addItem(card);
+  }
+});
 
-// закрытие попапа
-function closePopup(popup) {
-  popup.classList.remove("popup_opend");
-  document.removeEventListener("keydown", closeKeydownPopup);
-}
+const popupClassProfil = new PopupWithForm({
+  selectorPopup: ".popup_name_profile",
+  handleFormSubmit: ({ name, profession }) => {
+    userInfo.setUserInfo({ name, profession });
+  },
+});
 
+const popupWithIMG = new PopupWithImage(".popup_name_img");
 
-
-// редактирование профиля
-function editProfile(e) {
-  e.preventDefault();
-  username.textContent = inputName.value;
-  profession.textContent = inputProfession.value;
-  closePopup(popupProfile);
-  validationProfile.resetValidation();
-}
-
-// создание экземпляра карточки
-function creatCard(nameValue, linkValue, newTemplate) {
-  const card = new Card(nameValue, linkValue, newTemplate);
+function creatCard(obj) {
+  const card = new Card(obj);
   const cardElement = card.generateCard();
   return cardElement;
 }
 
+
+// инициация экземпляра класса секции для отоброжения карточек
+const cardsContainer = new Section(
+  {
+    data: initialCards,
+    renderer: (item) => {
+      const card = creatCard({
+        name: item.name,
+        link: item.link,
+        templateSelector: ".element-template",
+        handleCardClick: (name, link) => {
+          popupWithIMG.open(name, link);
+        },
+      });
+      cardsContainer.addItem(card);
+    },
+  },
+  ".elements__list"
+);
+
 // отображение карточки в ДОМ
-// function renderItem(item) {
-//   cardsContainer.prepend(item);
-
-// }
-
-// загрузка карточек из массива
-// initialCards.forEach(item=> {
-//   renderItem(creatCard(item.name, item.link, ".element-template"));
-
-// })
+cardsContainer.renderItem();
 
 
-// добавление карточки на страницу
-
-function addCard(e) {
-  e.preventDefault();
-  cardsContainer.addItem(creatCard(inputImgName.value, inputImgLink.value, ".element-template"));
-  closePopup(popupNetItem);
-  formCard.reset();
-}
-
-
-// редактирование профиля
+// открфтие редактирования профиля
 buttonEdit.addEventListener("click", function () {
-  openPopup(popupProfile);
-  inputName.value = username.textContent;
-  inputProfession.value = profession.textContent;
+  popupClassProfil.open();
+  inputName.value = userInfo.getUserInfo()["name"];
+  inputProfession.value = userInfo.getUserInfo()["profession"];
   validationProfile.resetValidation();
 });
 
-// добавление карточки
+// открытие добавления карточки
 buttonAdd.addEventListener("click", function () {
-
   validationCard.resetValidation();
-  openPopup(popupNetItem);
+  popupClassCard.open();
 
-  formCard.reset();
+
 });
 
-// закрытие попапа по нажатию на крестик
-buttonsClose.forEach((e) =>
-  e.addEventListener("click", function (e) {
-    closePopup(e.target.closest(".popup"));
-  })
-);
-
-// закрытие попапа по нажатию на оверлэй
-popups.forEach((e) =>
-  e.addEventListener("click", function (e) {
-    if (e.target.classList.contains("popup_opend")) {
-      closePopup(e.target);
-
-    }
-  })
-);
-
-// функция закрытия попапа по нажатию на эскейп
-function closeKeydownPopup(evt) {
-
-  if (evt.key === "Escape") {
-    const popupOpend = document.querySelector(".popup_opend");
-    closePopup(popupOpend);
-  }
-}
 
 
 
-formProfile.addEventListener("submit", editProfile);
-formCard.addEventListener("submit", addCard);
-
-
-export {picturePopupImage, titlePopupImage, popupImage, openPopup}
+popupWithIMG.setEventListeners();
+popupClassProfil.setEventListeners();
+popupClassCard.setEventListeners();
