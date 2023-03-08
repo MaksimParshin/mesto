@@ -5,16 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Место</title>
-    <link rel="stylesheet" href="./pages/index.css" />
+    <!-- <link rel="stylesheet" href="./pages/index.css" /> -->
   </head>
   <body class="page">
     <header class="header">
-      <img class="header__logo" src="./images/logo.svg" alt="Логотип место" />
+      <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип место" />
     </header>
     <main class="main">
       <section class="profile">
         <div class="profile__container">
-          <img class="profile__avatar" src="./images/kusto.jpg" alt="Кусто" />
+          <img class="profile__avatar" src="<%=require('./images/kusto.jpg')%>" alt="Кусто" />
           <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <button
@@ -157,6 +157,6 @@
         </div>
       </div>
     </template>
-    <script type="module" src="./pages/index.js"></script>
+    <!-- <script type="module" src="./pages/index.js"></script> -->
   </body>
 </html>
