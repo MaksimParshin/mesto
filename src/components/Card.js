@@ -1,6 +1,5 @@
-
 export default class Card {
-  constructor({name, link, templateSelector, handleCardClick}) {
+  constructor({ name, link, templateSelector, handleCardClick }) {
     this._name = name;
     this._link = link;
     this._templateSelector = templateSelector;
@@ -18,6 +17,8 @@ export default class Card {
     this._element = this._getTemplate();
     this._picture = this._element.querySelector(".element__image");
     this._title = this._element.querySelector(".element__title");
+    this._likeButton = this._element.querySelector(".element__like-button");
+    this._deletButton = this._element.querySelector(".element__recicle-bin");
     this._title.textContent = this._name;
     this._picture.src = this._link;
     this._picture.alt = this._name;
@@ -36,25 +37,16 @@ export default class Card {
     this._element.remove();
   }
 
-  _toggleLike() {
-    this._element
-      .querySelector(".element__like-button")
-      .classList.toggle("element__like-button_state_active");
-  }
-
   _setEventListener() {
-    this._element
-      .querySelector(".element__recicle-bin")
-      .addEventListener("click", () => {
-        this._deleteCard();
-      });
+    this._deletButton.addEventListener("click", () => {
+      this._deleteCard();
+    });
     this._picture.addEventListener("click", () => {
       this._handleCardClick(this._name, this._link);
     });
-    this._element
-      .querySelector(".element__like-button")
-      .addEventListener("click", () => {
-        this._toggleLike();
-      });
+
+    this._likeButton.addEventListener("click", () => {
+      this._toggleLike();
+    });
   }
 }

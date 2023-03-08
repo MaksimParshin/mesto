@@ -1,4 +1,4 @@
-import './index.css';
+import "./index.css";
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import { initialCards, objValidate } from "../utils/constants.js";
@@ -6,7 +6,6 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-
 
 const buttonEdit = document.querySelector(".profile__edit-button");
 
@@ -19,8 +18,6 @@ const buttonAdd = document.querySelector(".profile__add-button");
 // получение формы
 const formProfile = document.querySelector(".popup__form_name_profile");
 const formCard = document.querySelector(".popup__form_name_element");
-
-
 
 const validationProfile = new FormValidator(objValidate, formProfile);
 validationProfile.enableValidate();
@@ -35,10 +32,9 @@ const userInfo = new UserInfo({
   profileAbout: ".profile__profession",
 });
 
-
 const popupClassCard = new PopupWithForm({
   selectorPopup: ".popup_name_element",
-  handleFormSubmit: ({place, link}) => {
+  handleFormSubmit: ({ place, link }) => {
     const card = creatCard({
       name: place,
       link: link,
@@ -48,7 +44,7 @@ const popupClassCard = new PopupWithForm({
       },
     });
     cardsContainer.addItem(card);
-  }
+  },
 });
 
 const popupClassProfil = new PopupWithForm({
@@ -65,7 +61,6 @@ function creatCard(obj) {
   const cardElement = card.generateCard();
   return cardElement;
 }
-
 
 // инициация экземпляра класса секции для отоброжения карточек
 const cardsContainer = new Section(
@@ -87,27 +82,25 @@ const cardsContainer = new Section(
 );
 
 // отображение карточки в ДОМ
-cardsContainer.renderItem();
+cardsContainer.renderItems();
 
-
-// открфтие редактирования профиля
-buttonEdit.addEventListener("click", function () {
+function editProfile() {
   popupClassProfil.open();
   inputName.value = userInfo.getUserInfo()["name"];
   inputProfession.value = userInfo.getUserInfo()["profession"];
   validationProfile.resetValidation();
-});
+}
 
-// открытие добавления карточки
-buttonAdd.addEventListener("click", function () {
+function addCard() {
   validationCard.resetValidation();
   popupClassCard.open();
+}
 
+// открфтие редактирования профиля
+buttonEdit.addEventListener("click", editProfile);
 
-});
-
-
-
+// открытие добавления карточки
+buttonAdd.addEventListener("click", addCard);
 
 popupWithIMG.setEventListeners();
 popupClassProfil.setEventListeners();
