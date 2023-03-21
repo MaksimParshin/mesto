@@ -17,4 +17,4 @@
 * валидация форм
 * ООП
 
-Ссылка на страницу [Mesto](https://maksimparshin.github.io/mesto/)
+
