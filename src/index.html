@@ -9,12 +9,23 @@
   </head>
   <body class="page">
     <header class="header">
-      <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип место" />
+      <img
+        class="header__logo"
+        src="<%=require('./images/logo.svg')%>"
+        alt="Логотип место"
+      />
     </header>
     <main class="main">
       <section class="profile">
         <div class="profile__container">
-          <img class="profile__avatar" src="<%=require('./images/kusto.jpg')%>" alt="Кусто" />
+          <button class="profile__avatar-button" type="button">
+            <img
+              class="profile__avatar"
+              src="<%=require('./images/kusto.jpg')%>"
+              alt="Кусто"
+            />
+          </button>
+
           <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <button
@@ -38,6 +49,44 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
+
+    <!-- попап редактирования аватара -->
+    <div class="popup popup_name_avatar">
+      <div class="popup__container">
+        <button
+          class="popup__close-button"
+          type="button"
+          aria-label="закрыть попап"
+        ></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form
+          class="popup__form popup__form_name_avatar"
+          method="post"
+          name="form-popup"
+          novalidate
+        >
+          <label class="popup__label">
+            <input
+              class="popup__input popup__input_value_avatar"
+              type="url"
+              placeholder="Введите ссылку"
+              name="avatar"
+              required
+            />
+            <span class="popup__error avatar-error"></span>
+          </label>
+
+          <button
+            type="submit"
+            class="popup__submit-button"
+            aria-label="создать аватар"
+          >
+            Сохранить
+          </button>
+        </form>
+      </div>
+    </div>
+
     <!-- попап редактирования профиля -->
     <div class="popup popup_name_profile">
       <div class="popup__container">
