@@ -9,13 +9,13 @@ export default class UserInfo {
     return {
       name: this._userName.textContent,
       about: this._profession.textContent,
-      avatar: this._avatar.textContent
+      avatar: this._avatar.src
     };
   }
 
   setUserInfo(data) {
     this._userName.textContent = data.name;
     this._profession.textContent = data.about;
-    this._avatar.textContent = data.avatar;
+    this._avatar.src = data.avatar;
   }
 }

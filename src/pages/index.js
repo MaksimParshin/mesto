@@ -47,7 +47,7 @@ validationCard.resetValidation();
 const userInfo = new UserInfo({
   profileUserName: ".profile__name",
   profileAbout: ".profile__profession",
-  profileAvatar: ".profile__avatar"
+  profileAvatar: ".profile__avatar",
 });
 
 const popupClassCard = new PopupWithForm({
@@ -74,7 +74,6 @@ const popupClassProfil = new PopupWithForm({
   },
 });
 
-
 const popupClassAvatar = new PopupWithForm({
   selectorPopup: ".popup_name_avatar",
   handleFormSubmit: (item) => {
@@ -82,7 +81,7 @@ const popupClassAvatar = new PopupWithForm({
       userInfo.setUserInfo(data);
     });
   },
-})
+});
 
 const popupWithIMG = new PopupWithImage(".popup_name_img");
 
@@ -111,13 +110,16 @@ const cardsContainer = new Section(
 );
 
 // отображение карточки в ДОМ
-API.getInitialCards().then((data) => cardsContainer.renderItems(data));
+API.getInitialCards()
+  .then((data) => cardsContainer.renderItems(data))
+  .catch((err) => {
+    console.log(err);
+  });
 
 function editAvatar() {
   popupClassAvatar.open();
   inputAvatar.value = userInfo.getUserInfo()["avatar"];
-  validationAvatar.resetValidation()
-
+  validationAvatar.resetValidation();
 }
 
 function editProfile() {
@@ -133,7 +135,7 @@ function addCard() {
 }
 
 // открытие редактирования авататара
-buttonAvatar.addEventListener('click', editAvatar)
+buttonAvatar.addEventListener("click", editAvatar);
 
 // открфтие редактирования профиля
 buttonEdit.addEventListener("click", editProfile);
@@ -141,14 +143,14 @@ buttonEdit.addEventListener("click", editProfile);
 // открытие добавления карточки
 buttonAdd.addEventListener("click", addCard);
 
-
-
-API.getUserInfo().then((data) => {
-  userInfo.setUserInfo(data);
-  profileAvatar.src = data.avatar;
-});
-
-
+API.getUserInfo()
+  .then((data) => {
+    userInfo.setUserInfo(data);
+    profileAvatar.src = data.avatar;
+  })
+  // .catch((err) => {
+  //   console.log(err);
+  // });
 
 // слушатели попапов
 popupClassAvatar.setEventListeners();
