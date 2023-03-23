@@ -54,3 +54,7 @@
 @import url(../blocks/popup/__error/popup__error.css);
 @import url(../blocks/popup/__error/_visible/popup__error_visible.css);
 @import url(../blocks/popup/__submit-button/_disabled/popup__submit-button_disabled.css);
+@import url(../blocks/popup/__container/_name/popup__container_name_avatar.css);
+@import url(../blocks/popup/__container/_name/popup__container_name_card-delet.css);
+@import url(../blocks/popup/__submit-button/_name_card-delet/popup__submit-button_name_card-delet.css);
+@import url(../blocks/popup/__title/_name_card-delet/popup__title_name_card-delet.css);

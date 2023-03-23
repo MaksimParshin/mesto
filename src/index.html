@@ -19,11 +19,7 @@
       <section class="profile">
         <div class="profile__container">
           <button class="profile__avatar-button" type="button">
-            <img
-              class="profile__avatar"
-              src="#"
-              alt="аватар"
-            />
+            <img class="profile__avatar" src="#" alt="аватар" />
           </button>
 
           <div class="profile__info">
@@ -52,7 +48,7 @@
 
     <!-- попап редактирования аватара -->
     <div class="popup popup_name_avatar">
-      <div class="popup__container">
+      <div class="popup__container popup__container_name_avatar">
         <button
           class="popup__close-button"
           type="button"
@@ -195,6 +191,27 @@
         <p class="popup__img-title"></p>
       </div>
     </div>
+
+    <!-- попап удаления карточки -->
+    <div class="popup popup_name_card-delet popup_opend">
+      <div class="popup__container popup__container_name_card-delet">
+        <button
+          class="popup__close-button"
+          type="button"
+          aria-label="закрыть попап"
+        ></button>
+        <h2 class="popup__title popup__title_name_card-delet">Вы уверены?</h2>
+
+        <button
+          type="button"
+          class="popup__submit-button popup__submit-button_name_card-delet"
+          aria-label="удалить карточку"
+        >
+          Да
+        </button>
+      </div>
+    </div>
+
     <!-- шаблон карточки -->
     <template class="element-template">
       <div class="element">
