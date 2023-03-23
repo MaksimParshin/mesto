@@ -193,7 +193,7 @@
     </div>
 
     <!-- попап удаления карточки -->
-    <div class="popup popup_name_card-delet popup_opend">
+    <div class="popup popup_name_card-delet">
       <div class="popup__container popup__container_name_card-delet">
         <button
           class="popup__close-button"
@@ -219,7 +219,10 @@
         <img class="element__image" src="#" alt="" />
         <div class="element__container">
           <h2 class="element__title"></h2>
-          <button class="element__like-button" type="button"></button>
+          <div class="element__like-container">
+            <button class="element__like-button" type="button"></button>
+            <p class="element__like-counter">0</p>
+          </div>
         </div>
       </div>
     </template>

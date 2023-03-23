@@ -3,4 +3,5 @@
   margin: 25px auto 25px auto;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
