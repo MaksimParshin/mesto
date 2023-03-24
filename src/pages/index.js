@@ -25,6 +25,8 @@ const formProfile = document.querySelector(".popup__form_name_profile");
 const formCard = document.querySelector(".popup__form_name_element");
 const formAvatar = document.querySelector(".popup__form_name_avatar");
 
+let currentID = null;
+
 const API = new Api({
   token: "206a79e8-9bf0-471f-b412-b2cba24c2ed9",
   userID: "cohort-62",
@@ -49,6 +51,7 @@ const userInfo = new UserInfo({
   profileAbout: ".profile__profession",
   profileAvatar: ".profile__avatar",
 });
+
 
 const popupClassCard = new PopupWithForm({
   selectorPopup: ".popup_name_element",
@@ -160,7 +163,11 @@ buttonAdd.addEventListener("click", addCard);
 API.getUserInfo().then((data) => {
   userInfo.setUserInfo(data);
   profileAvatar.src = data.avatar;
+  currentID = data._id;
+  console.log(currentID);
 });
+
+
 // .catch((err) => {
 //   console.log(err);
 // });
