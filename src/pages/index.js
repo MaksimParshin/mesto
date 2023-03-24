@@ -72,6 +72,7 @@ const popupClassProfil = new PopupWithForm({
     API.setUserInfo(item)
       .then((data) => {
         userInfo.setUserInfo(data);
+        popupClassProfil.close();
       })
       .catch((err) => console.log(err))
       .finally(() => {
@@ -87,6 +88,7 @@ const popupClassAvatar = new PopupWithForm({
     API.setAvatar(item)
       .then((data) => {
         userInfo.setUserInfo(data);
+        popupClassAvatar.close();
       })
       .catch((err) => console.log(err))
       .finally(() => {
