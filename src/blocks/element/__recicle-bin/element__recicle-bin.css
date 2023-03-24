@@ -1,4 +1,5 @@
 .element__recicle-bin {
+  display: none;
   width: 18px;
   height: 19px;
   background: url(../../../images/bin.svg);

@@ -55,16 +55,20 @@ const userInfo = new UserInfo({
 
 const popupClassCard = new PopupWithForm({
   selectorPopup: ".popup_name_element",
-  handleFormSubmit: ({ place, link }) => {
-    const card = creatCard({
-      name: place,
-      link: link,
-      templateSelector: ".element-template",
-      handleCardClick: (name, link) => {
-        popupWithIMG.open(name, link);
-      },
-    });
-    cardsContainer.addItem(card);
+  handleFormSubmit: (data) => {
+    API.createCard(data)
+    .then((newCard)=>{
+      const card = creatCard({
+        data: newCard,
+        currentId: currentID,
+        templateSelector: ".element-template",
+        handleCardClick: (name, link) => {
+          popupWithIMG.open(name, link);
+        },
+      });
+      cardsContainer.addItem(card);
+    })
+
   },
 });
 
@@ -111,10 +115,10 @@ function creatCard(obj) {
 // инициация экземпляра класса секции для отоброжения карточек
 const cardsContainer = new Section(
   {
-    renderer: (item) => {
+    renderer: (data, currentId) => {
       const card = creatCard({
-        name: item.name,
-        link: item.link,
+        data: data,
+        currentId: currentId,
         templateSelector: ".element-template",
         handleCardClick: (name, link) => {
           popupWithIMG.open(name, link);
@@ -127,11 +131,11 @@ const cardsContainer = new Section(
 );
 
 // отображение карточки в ДОМ
-API.getInitialCards()
-  .then((data) => cardsContainer.renderItems(data))
-  .catch((err) => {
-    console.log(err);
-  });
+// API.getInitialCards()
+//   .then((data) => cardsContainer.renderItems(data))
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 function editAvatar() {
   popupClassAvatar.open();
@@ -160,17 +164,25 @@ buttonEdit.addEventListener("click", editProfile);
 // открытие добавления карточки
 buttonAdd.addEventListener("click", addCard);
 
-API.getUserInfo().then((data) => {
-  userInfo.setUserInfo(data);
-  profileAvatar.src = data.avatar;
-  currentID = data._id;
-  console.log(currentID);
-});
+// API.getUserInfo().then((data) => {
+//   userInfo.setUserInfo(data);
+//   profileAvatar.src = data.avatar;
+//   currentID = data._id;
+//   console.log(currentID);
+// });
 
 
 // .catch((err) => {
 //   console.log(err);
 // });
+
+Promise.all([API.getUserInfo(), API.getInitialCards()])
+.then(([resUser, resCard])=>{
+  userInfo.setUserInfo(resUser);
+  profileAvatar.src = resUser.avatar;
+  currentID = resUser._id;
+  cardsContainer.renderItems(resCard, currentID)
+})
 
 // слушатели попапов
 popupClassAvatar.setEventListeners();

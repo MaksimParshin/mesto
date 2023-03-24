@@ -1,9 +1,12 @@
 export default class Card {
-  constructor({ name, link, templateSelector, handleCardClick }) {
-    this._name = name;
-    this._link = link;
+  constructor({ data, currentId, templateSelector, handleCardClick }) {
+    this._name = data.name;
+    this._link = data.link;
+    this._cardUserId = data.owner._id;
+    this._dataLikes = data.likes;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._currentId = currentId;
   }
   _getTemplate() {
     const cardElement = document
@@ -19,11 +22,15 @@ export default class Card {
     this._title = this._element.querySelector(".element__title");
     this._likeButton = this._element.querySelector(".element__like-button");
     this._deletButton = this._element.querySelector(".element__recicle-bin");
+    this._likeCounter = this._element.querySelector(".element__like-counter");
     this._title.textContent = this._name;
     this._picture.src = this._link;
     this._picture.alt = this._name;
+    this._likeCounter.textContent = this._dataLikes.length;
     this._setEventListener();
-
+    if (this._currentId === this._cardUserId) {
+      this._deletButton.classList.add("element__recicle-bin_state_active");
+    }
     return this._element;
   }
 
@@ -50,3 +57,4 @@ export default class Card {
     });
   }
 }
+

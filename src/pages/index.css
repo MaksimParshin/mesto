@@ -34,6 +34,7 @@
 @import url(../blocks/element/__like-button/_state/element__like-button_state_active.css);
 @import url(../blocks/element/__recicle-bin/element__recicle-bin.css);
 @import url(../blocks/element/__like-counter/element__like-counter.css);
+@import url(../blocks/element/__recicle-bin/_state/element__recicle-bin_state_active.css);
 
 /* footer */
 @import url(../blocks/footer/footer.css);
