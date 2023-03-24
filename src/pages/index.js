@@ -68,18 +68,30 @@ const popupClassCard = new PopupWithForm({
 const popupClassProfil = new PopupWithForm({
   selectorPopup: ".popup_name_profile",
   handleFormSubmit: (item) => {
-    API.setUserInfo(item).then((data) => {
-      userInfo.setUserInfo(data);
-    });
+    popupClassProfil.renderLoading(true, "Сохранение...");
+    API.setUserInfo(item)
+      .then((data) => {
+        userInfo.setUserInfo(data);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        popupClassProfil.renderLoading(false);
+      });
   },
 });
 
 const popupClassAvatar = new PopupWithForm({
   selectorPopup: ".popup_name_avatar",
   handleFormSubmit: (item) => {
-    API.setAvatar(item).then((data) => {
-      userInfo.setUserInfo(data);
-    });
+    popupClassAvatar.renderLoading(true, "Сохранение...");
+    API.setAvatar(item)
+      .then((data) => {
+        userInfo.setUserInfo(data);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        popupClassAvatar.renderLoading(false);
+      });
   },
 });
 
@@ -143,14 +155,13 @@ buttonEdit.addEventListener("click", editProfile);
 // открытие добавления карточки
 buttonAdd.addEventListener("click", addCard);
 
-API.getUserInfo()
-  .then((data) => {
-    userInfo.setUserInfo(data);
-    profileAvatar.src = data.avatar;
-  })
-  // .catch((err) => {
-  //   console.log(err);
-  // });
+API.getUserInfo().then((data) => {
+  userInfo.setUserInfo(data);
+  profileAvatar.src = data.avatar;
+});
+// .catch((err) => {
+//   console.log(err);
+// });
 
 // слушатели попапов
 popupClassAvatar.setEventListeners();
