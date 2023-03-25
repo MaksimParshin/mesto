@@ -55,53 +55,54 @@ const userInfo = new UserInfo({
 // создание карточки
 const popupClassCard = new PopupWithForm({
   selectorPopup: ".popup_name_element",
-  handleFormSubmit: (data) => {
-    API.createCard(data)
-    .then((newCard)=>{
-      const card = creatCard({
-        data: newCard,
-        currentId: currentID,
-        templateSelector: ".element-template",
-        handleCardClick: (name, link) => {
-          popupWithIMG.open(name, link);
-        },
-      });
-      cardsContainer.addItem(card);
-    })
-
+  handleFormSubmit: (data, currentID) => {
+    API.createCard(data).then((data) => {
+      cardsContainer.addItem(creatCard(data, currentID));
+    });
   },
 });
 
+function creatCard(data, currentID) {
+  const card = new Card({
+    data: data,
+    currentId: currentID,
+    templateSelector: ".element-template",
+    handleCardClick: (name, link) => {
+      popupWithIMG.open(name, link);
+    },
+    handleDeleteLikeCard: () => {
+      API.deleteLike(data._id).then((data) => {
+        card.switchLike();
+        card.showLikes(data.likes.length);
+        card.deleteLikeCard();
+      });
+    },
+    handleLikeCard: () => {
+      API.putLike(data._id).then((data) => {
+        card.switchLike();
+        card.showLikes(data.likes.length);
+        card.likeCard();
+      });
+    },
+  });
 
-function creatCard(obj) {
-  const card = new Card(obj);
-  const cardElement = card.generateCard();
-  return cardElement;
+  return card.generateCard();
+
 }
 
 // инициация экземпляра класса секции для отоброжения карточек
 const cardsContainer = new Section(
   {
-    renderer: (data, currentId) => {
-      const card = creatCard({
-        data: data,
-        currentId: currentId,
-        templateSelector: ".element-template",
-        handleCardClick: (name, link) => {
-          popupWithIMG.open(name, link);
-        },
-      });
-      cardsContainer.addItem(card);
+    renderer: (data, currentID) => {
+
+      cardsContainer.addItem(creatCard(data, currentID));
     },
   },
   ".elements__list"
 );
 
+
 // отображение карточки в ДОМ
-
-
-
-
 
 const popupClassProfil = new PopupWithForm({
   selectorPopup: ".popup_name_profile",
@@ -136,10 +137,6 @@ const popupClassAvatar = new PopupWithForm({
 });
 
 const popupWithIMG = new PopupWithImage(".popup_name_img");
-
-
-
-
 
 function editAvatar() {
   popupClassAvatar.open();
@@ -181,13 +178,14 @@ buttonAdd.addEventListener("click", addCard);
 //     console.log(err);
 //   });
 
-Promise.all([API.getUserInfo(), API.getInitialCards()])
-.then(([resUser, resCard])=>{
-  userInfo.setUserInfo(resUser);
-  profileAvatar.src = resUser.avatar;
-  currentID = resUser._id;
-  cardsContainer.renderItems(resCard, currentID)
-})
+Promise.all([API.getUserInfo(), API.getInitialCards()]).then(
+  ([resUser, resCard]) => {
+    userInfo.setUserInfo(resUser);
+    profileAvatar.src = resUser.avatar;
+    currentID = resUser._id;
+    cardsContainer.renderItems(resCard, currentID);
+  }
+);
 
 // .catch((err) => {
 //   console.log(err);

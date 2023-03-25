@@ -1,5 +1,6 @@
 export default class Card {
-  constructor({ data, currentId, templateSelector, handleCardClick }) {
+  constructor({ data, currentId, templateSelector, handleCardClick, handleDeleteLikeCard, handleLikeCard}) {
+    this._card = data;
     this._name = data.name;
     this._link = data.link;
     this._cardUserId = data.owner._id;
@@ -7,6 +8,8 @@ export default class Card {
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._currentId = currentId;
+    this._handleDeleteLikeCard = handleDeleteLikeCard;
+    this._handleLikeCard = handleLikeCard;
   }
   _getTemplate() {
     const cardElement = document
@@ -26,7 +29,8 @@ export default class Card {
     this._title.textContent = this._name;
     this._picture.src = this._link;
     this._picture.alt = this._name;
-    this._likeCounter.textContent = this._dataLikes.length;
+    this.showLikes(this._card.likes.length);
+    this.switchLike();
     this._setEventListener();
     if (this._currentId === this._cardUserId) {
       this._deletButton.classList.add("element__recicle-bin_state_active");
@@ -34,14 +38,37 @@ export default class Card {
     return this._element;
   }
 
-  _toggleLike() {
+  // _toggleLike() {
+  //   this._element
+  //     .querySelector(".element__like-button")
+  //     .classList.toggle("element__like-button_state_active");
+  // }
+
+  likeCard() {
     this._element
       .querySelector(".element__like-button")
-      .classList.toggle("element__like-button_state_active");
+      .classList.add("element__like-button_state_active");
+  }
+
+  deleteLikeCard() {
+    this._element
+    .querySelector(".element__like-button")
+    .classList.remove("element__like-button_state_active");
   }
 
   _deleteCard() {
     this._element.remove();
+  }
+
+  showLikes(likes) {
+    this._likeCounter.textContent = likes;
+  }
+
+  switchLike() {
+    return Array.from(this._card.likes).forEach((likeInfo)=>{
+      likeInfo._id === this._currentId ? this.likeCard() : this.deleteLikeCard();
+
+    })
   }
 
   _setEventListener() {
@@ -53,9 +80,13 @@ export default class Card {
     });
 
     this._likeButton.addEventListener("click", () => {
-      this._toggleLike();
+      // this._toggleLike();
+
+      if(!this._likeButton.classList.contains("element__like-button_state_active")) {
+        this._handleLikeCard();
+      } else {
+        this._handleDeleteLikeCard();
+      }
     });
   }
 }
-
-
