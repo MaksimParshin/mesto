@@ -52,7 +52,7 @@ const userInfo = new UserInfo({
   profileAvatar: ".profile__avatar",
 });
 
-
+// создание карточки
 const popupClassCard = new PopupWithForm({
   selectorPopup: ".popup_name_element",
   handleFormSubmit: (data) => {
@@ -71,6 +71,37 @@ const popupClassCard = new PopupWithForm({
 
   },
 });
+
+
+function creatCard(obj) {
+  const card = new Card(obj);
+  const cardElement = card.generateCard();
+  return cardElement;
+}
+
+// инициация экземпляра класса секции для отоброжения карточек
+const cardsContainer = new Section(
+  {
+    renderer: (data, currentId) => {
+      const card = creatCard({
+        data: data,
+        currentId: currentId,
+        templateSelector: ".element-template",
+        handleCardClick: (name, link) => {
+          popupWithIMG.open(name, link);
+        },
+      });
+      cardsContainer.addItem(card);
+    },
+  },
+  ".elements__list"
+);
+
+// отображение карточки в ДОМ
+
+
+
+
 
 const popupClassProfil = new PopupWithForm({
   selectorPopup: ".popup_name_profile",
@@ -106,36 +137,9 @@ const popupClassAvatar = new PopupWithForm({
 
 const popupWithIMG = new PopupWithImage(".popup_name_img");
 
-function creatCard(obj) {
-  const card = new Card(obj);
-  const cardElement = card.generateCard();
-  return cardElement;
-}
 
-// инициация экземпляра класса секции для отоброжения карточек
-const cardsContainer = new Section(
-  {
-    renderer: (data, currentId) => {
-      const card = creatCard({
-        data: data,
-        currentId: currentId,
-        templateSelector: ".element-template",
-        handleCardClick: (name, link) => {
-          popupWithIMG.open(name, link);
-        },
-      });
-      cardsContainer.addItem(card);
-    },
-  },
-  ".elements__list"
-);
 
-// отображение карточки в ДОМ
-// API.getInitialCards()
-//   .then((data) => cardsContainer.renderItems(data))
-//   .catch((err) => {
-//     console.log(err);
-//   });
+
 
 function editAvatar() {
   popupClassAvatar.open();
@@ -171,10 +175,11 @@ buttonAdd.addEventListener("click", addCard);
 //   console.log(currentID);
 // });
 
-
-// .catch((err) => {
-//   console.log(err);
-// });
+// API.getInitialCards()
+//   .then((data) => cardsContainer.renderItems(data))
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 Promise.all([API.getUserInfo(), API.getInitialCards()])
 .then(([resUser, resCard])=>{
@@ -183,6 +188,10 @@ Promise.all([API.getUserInfo(), API.getInitialCards()])
   currentID = resUser._id;
   cardsContainer.renderItems(resCard, currentID)
 })
+
+// .catch((err) => {
+//   console.log(err);
+// });
 
 // слушатели попапов
 popupClassAvatar.setEventListeners();
