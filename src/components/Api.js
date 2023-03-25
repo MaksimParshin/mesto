@@ -2,6 +2,14 @@ export default class Api {
   constructor({ token, userID }) {
     this._token = token;
     this._userID = userID;
+    // this._checkResponse = this._checkResponse.bind(this);
+  }
+
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
 
   getInitialCards() {
@@ -10,12 +18,7 @@ export default class Api {
         authorization: this._token,
         "Content-Type": "application/json",
       },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    }).then(this._checkResponse);
   }
 
   getUserInfo() {
@@ -24,12 +27,7 @@ export default class Api {
         authorization: this._token,
         "Content-Type": "application/json",
       },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    }).then(this._checkResponse);
   }
 
   setUserInfo(item) {
@@ -43,12 +41,7 @@ export default class Api {
         name: item.name,
         about: item.about,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    }).then(this._checkResponse);
   }
 
   setAvatar(item) {
@@ -64,12 +57,7 @@ export default class Api {
           avatar: item.avatar,
         }),
       }
-    ).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    ).then(this._checkResponse);
   }
   createCard(data) {
     return fetch(`https://mesto.nomoreparties.co/v1/${this._userID}/cards`, {
@@ -82,12 +70,7 @@ export default class Api {
         name: data.name,
         link: data.link,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    }).then(this._checkResponse);
   }
 
   deleteCard(cardId) {
@@ -100,12 +83,7 @@ export default class Api {
           "Content-Type": "application/json",
         },
       }
-    ).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    ).then(this._checkResponse);
   }
 
   putLike(cardId) {
@@ -118,12 +96,7 @@ export default class Api {
           "Content-Type": "application/json",
         },
       }
-    ).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    ).then(this._checkResponse);
   }
 
   deleteLike(cardId) {
@@ -136,11 +109,6 @@ export default class Api {
           "Content-Type": "application/json",
         },
       }
-    ).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    ).then(this._checkResponse);
   }
 }

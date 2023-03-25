@@ -1,7 +1,7 @@
 import "./index.css";
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
-import { initialCards, objValidate } from "../utils/constants.js";
+import { objValidate } from "../utils/constants.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -31,8 +31,6 @@ const API = new Api({
   userID: "cohort-62",
 });
 
-// API.getUserInfo().then((data) => console.log(data));
-
 const validationAvatar = new FormValidator(objValidate, formAvatar);
 validationAvatar.enableValidate();
 validationAvatar.resetValidation();
@@ -60,22 +58,25 @@ function creatCard(data) {
       popupWithIMG.open(name, link);
     },
     handleDeleteLikeCard: () => {
-      API.deleteLike(data._id).then((data) => {
-        card.switchLike();
-        card.showLikes(data.likes.length);
-        card.deleteLikeCard();
-      });
+      API.deleteLike(data._id)
+        .then((data) => {
+          card.switchLike();
+          card.showLikes(data.likes.length);
+          card.deleteLikeCard();
+        })
+        .catch((err) => console.log(err));
     },
     handleLikeCard: () => {
-      API.putLike(data._id).then((data) => {
-        card.switchLike();
-        card.showLikes(data.likes.length);
-        card.likeCard();
-      });
+      API.putLike(data._id)
+        .then((data) => {
+          card.switchLike();
+          card.showLikes(data.likes.length);
+          card.likeCard();
+        })
+        .catch((err) => console.log(err));
     },
     handleDeleteCard: () => {
       popupWithDelete.open(card, data._id);
-      // console.log(data)
     },
   });
 
@@ -134,6 +135,7 @@ const popupClassCard = new PopupWithForm({
     API.createCard(data)
       .then((data) => {
         cardsContainer.addItem(creatCard(data));
+        popupClassCard.close()
       })
       .catch((err) => console.log(err))
       .finally(() => {
