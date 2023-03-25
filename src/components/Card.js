@@ -1,15 +1,17 @@
 export default class Card {
-  constructor({ data, currentID, templateSelector, handleCardClick, handleDeleteLikeCard, handleLikeCard}) {
+  constructor({ data, currentID, templateSelector, handleCardClick, handleDeleteLikeCard, handleLikeCard, handleDeleteCard}) {
     this._card = data;
     this._name = data.name;
     this._link = data.link;
     this._cardUserId = data.owner._id;
     this._dataLikes = data.likes;
+    this.idCard = data._id;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._currentID = currentID();
     this._handleDeleteLikeCard = handleDeleteLikeCard;
     this._handleLikeCard = handleLikeCard;
+    this._handleDeleteCard = handleDeleteCard;
   }
   _getTemplate() {
     const cardElement = document
@@ -32,9 +34,10 @@ export default class Card {
     this.showLikes(this._card.likes.length);
     this.switchLike();
     this._setEventListener();
-    // if (this._myID === this._cardUserId) {
-    //   this._deletButton.classList.add("element__recicle-bin_state_active");
-    // }
+
+    if (this._currentID === this._cardUserId) {
+      this._deletButton.classList.add("element__recicle-bin_state_active");
+    }
     return this._element;
   }
 
@@ -51,8 +54,9 @@ export default class Card {
     .classList.remove("element__like-button_state_active");
   }
 
-  _deleteCard() {
+  deleteCard() {
     this._element.remove();
+    this._element = null;
   }
 
   showLikes(likes) {
@@ -68,8 +72,11 @@ export default class Card {
 
   _setEventListener() {
     this._deletButton.addEventListener("click", () => {
-      this._deleteCard();
+
+      this._handleDeleteCard(this);
     });
+
+
     this._picture.addEventListener("click", () => {
       this._handleCardClick(this._name, this._link);
     });
@@ -79,7 +86,7 @@ export default class Card {
       if(!this._likeButton.classList.contains("element__like-button_state_active")) {
         this._handleLikeCard(this);
       } else {
-        this._handleDeleteLikeCard(this);
+        this._handleDeleteLikeCard(this.idCard, this._card);
       }
     });
   }

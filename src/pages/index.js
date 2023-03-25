@@ -7,6 +7,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
+import PopupWithSubmit from "../components/popupWithSubmit.js";
 
 const buttonEdit = document.querySelector(".profile__edit-button");
 
@@ -24,8 +25,6 @@ const profileAvatar = document.querySelector(".profile__avatar");
 const formProfile = document.querySelector(".popup__form_name_profile");
 const formCard = document.querySelector(".popup__form_name_element");
 const formAvatar = document.querySelector(".popup__form_name_avatar");
-
-
 
 const API = new Api({
   token: "206a79e8-9bf0-471f-b412-b2cba24c2ed9",
@@ -52,16 +51,6 @@ const userInfo = new UserInfo({
   profileAvatar: ".profile__avatar",
 });
 
-// создание карточки
-const popupClassCard = new PopupWithForm({
-  selectorPopup: ".popup_name_element",
-  handleFormSubmit: (data) => {
-    API.createCard(data).then((data) => {
-      cardsContainer.addItem(creatCard(data));
-    });
-  },
-});
-
 function creatCard(data) {
   const card = new Card({
     data: data,
@@ -84,23 +73,24 @@ function creatCard(data) {
         card.likeCard();
       });
     },
+    handleDeleteCard: () => {
+      popupWithDelete.open(card, data._id);
+      // console.log(data)
+    },
   });
 
   return card.generateCard();
-
 }
 
 // инициация экземпляра класса секции для отоброжения карточек
 const cardsContainer = new Section(
   {
     renderer: (data) => {
-
       cardsContainer.addItem(creatCard(data));
     },
   },
   ".elements__list"
 );
-
 
 // отображение карточки в ДОМ
 
@@ -136,7 +126,40 @@ const popupClassAvatar = new PopupWithForm({
   },
 });
 
+// создание карточки
+const popupClassCard = new PopupWithForm({
+  selectorPopup: ".popup_name_element",
+  handleFormSubmit: (data) => {
+    popupClassCard.renderLoading(true, "Создание...");
+    API.createCard(data)
+      .then((data) => {
+        cardsContainer.addItem(creatCard(data));
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        popupClassCard.renderLoading(false);
+      });
+  },
+});
+
 const popupWithIMG = new PopupWithImage(".popup_name_img");
+
+const popupWithDelete = new PopupWithSubmit({
+  selectorPopup: ".popup_name_card-delet",
+  handleFormSubmit: (newCard, id) => {
+    popupWithDelete.renderLoading(true, "Удаление...");
+    API.deleteCard(id)
+      .then(() => {
+        newCard.deleteCard();
+
+        popupWithDelete.close();
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        popupWithDelete.renderLoading(false);
+      });
+  },
+});
 
 function editAvatar() {
   popupClassAvatar.open();
@@ -165,7 +188,6 @@ buttonEdit.addEventListener("click", editProfile);
 // открытие добавления карточки
 buttonAdd.addEventListener("click", addCard);
 
-
 Promise.all([API.getUserInfo(), API.getInitialCards()]).then(
   ([resUser, resCard]) => {
     userInfo.setUserInfo(resUser);
@@ -176,10 +198,9 @@ Promise.all([API.getUserInfo(), API.getInitialCards()]).then(
   }
 );
 
-
-
 // слушатели попапов
 popupClassAvatar.setEventListeners();
-popupWithIMG.setEventListeners();
 popupClassProfil.setEventListeners();
 popupClassCard.setEventListeners();
+popupWithIMG.setEventListeners();
+popupWithDelete.setEventListeners();
