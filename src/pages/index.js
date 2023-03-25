@@ -25,7 +25,7 @@ const formProfile = document.querySelector(".popup__form_name_profile");
 const formCard = document.querySelector(".popup__form_name_element");
 const formAvatar = document.querySelector(".popup__form_name_avatar");
 
-let currentID = null;
+
 
 const API = new Api({
   token: "206a79e8-9bf0-471f-b412-b2cba24c2ed9",
@@ -55,17 +55,17 @@ const userInfo = new UserInfo({
 // создание карточки
 const popupClassCard = new PopupWithForm({
   selectorPopup: ".popup_name_element",
-  handleFormSubmit: (data, currentID) => {
+  handleFormSubmit: (data) => {
     API.createCard(data).then((data) => {
-      cardsContainer.addItem(creatCard(data, currentID));
+      cardsContainer.addItem(creatCard(data));
     });
   },
 });
 
-function creatCard(data, currentID) {
+function creatCard(data) {
   const card = new Card({
     data: data,
-    currentId: currentID,
+    currentID: userInfo.getCurrentID,
     templateSelector: ".element-template",
     handleCardClick: (name, link) => {
       popupWithIMG.open(name, link);
@@ -93,9 +93,9 @@ function creatCard(data, currentID) {
 // инициация экземпляра класса секции для отоброжения карточек
 const cardsContainer = new Section(
   {
-    renderer: (data, currentID) => {
+    renderer: (data) => {
 
-      cardsContainer.addItem(creatCard(data, currentID));
+      cardsContainer.addItem(creatCard(data));
     },
   },
   ".elements__list"
@@ -165,31 +165,18 @@ buttonEdit.addEventListener("click", editProfile);
 // открытие добавления карточки
 buttonAdd.addEventListener("click", addCard);
 
-// API.getUserInfo().then((data) => {
-//   userInfo.setUserInfo(data);
-//   profileAvatar.src = data.avatar;
-//   currentID = data._id;
-//   console.log(currentID);
-// });
-
-// API.getInitialCards()
-//   .then((data) => cardsContainer.renderItems(data))
-//   .catch((err) => {
-//     console.log(err);
-//   });
 
 Promise.all([API.getUserInfo(), API.getInitialCards()]).then(
   ([resUser, resCard]) => {
     userInfo.setUserInfo(resUser);
+    userInfo.setCurrentID(resUser._id);
     profileAvatar.src = resUser.avatar;
-    currentID = resUser._id;
-    cardsContainer.renderItems(resCard, currentID);
+
+    cardsContainer.renderItems(resCard);
   }
 );
 
-// .catch((err) => {
-//   console.log(err);
-// });
+
 
 // слушатели попапов
 popupClassAvatar.setEventListeners();

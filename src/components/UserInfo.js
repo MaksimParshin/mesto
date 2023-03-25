@@ -3,6 +3,7 @@ export default class UserInfo {
     this._userName = document.querySelector(profileUserName);
     this._profession = document.querySelector(profileAbout);
     this._avatar = document.querySelector(profileAvatar);
+    this.getCurrentID = this.getCurrentID.bind(this);
   }
 
   getUserInfo() {
@@ -17,5 +18,13 @@ export default class UserInfo {
     this._userName.textContent = data.name;
     this._profession.textContent = data.about;
     this._avatar.src = data.avatar;
+  }
+
+  setCurrentID(id) {
+    this._currentID = id;
+  }
+
+  getCurrentID() {
+    return this._currentID;
   }
 }
