@@ -27,8 +27,11 @@ const formCard = document.querySelector(".popup__form_name_element");
 const formAvatar = document.querySelector(".popup__form_name_avatar");
 
 const API = new Api({
-  token: "206a79e8-9bf0-471f-b412-b2cba24c2ed9",
-  userID: "cohort-62",
+  headers: {
+    authorization: "206a79e8-9bf0-471f-b412-b2cba24c2ed9",
+    "Content-Type": "application/json",
+  },
+  baseURL: "https://mesto.nomoreparties.co/v1/cohort-62/",
 });
 
 const validationAvatar = new FormValidator(objValidate, formAvatar);
@@ -135,7 +138,7 @@ const popupClassCard = new PopupWithForm({
     API.createCard(data)
       .then((data) => {
         cardsContainer.addItem(creatCard(data));
-        popupClassCard.close()
+        popupClassCard.close();
       })
       .catch((err) => console.log(err))
       .finally(() => {
@@ -190,15 +193,15 @@ buttonEdit.addEventListener("click", editProfile);
 // открытие добавления карточки
 buttonAdd.addEventListener("click", addCard);
 
-Promise.all([API.getUserInfo(), API.getInitialCards()]).then(
-  ([resUser, resCard]) => {
+Promise.all([API.getUserInfo(), API.getInitialCards()])
+  .then(([resUser, resCard]) => {
     userInfo.setUserInfo(resUser);
     userInfo.setCurrentID(resUser._id);
     profileAvatar.src = resUser.avatar;
 
     cardsContainer.renderItems(resCard);
-  }
-);
+  })
+  .catch((err) => console.log(err));
 
 // слушатели попапов
 popupClassAvatar.setEventListeners();
